@@ -882,6 +882,10 @@ msgid ""
 "save the CO₂."
 msgstr ""
 
+#, python-format
+msgid "The password can have at most %(n)d characters."
+msgstr ""
+
 msgid "The password is wrong. Nothing was deleted."
 msgstr ""
 
@@ -925,9 +929,6 @@ msgid ""
 "try again."
 msgstr ""
 
-msgid "There already is an account with this email."
-msgstr ""
-
 msgid ""
 "This deletes your account, your plug connections with their access "
 "tokens, all settings and every charge, right away. It can't be undone."
@@ -955,7 +956,16 @@ msgstr ""
 msgid "Too many attempts. Please wait 15 minutes."
 msgstr ""
 
+msgid "Too many logins right now. Please try again in a minute."
+msgstr ""
+
 msgid "Too many registrations from your address. Please try again later."
+msgstr ""
+
+msgid "Too many registrations right now. Please try again in a minute."
+msgstr ""
+
+msgid "Too many wrong passwords. Please try again in an hour."
 msgstr ""
 
 msgid "Try a virtual plug first"

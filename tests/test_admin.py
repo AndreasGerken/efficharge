@@ -16,7 +16,7 @@ from efficharge.db.models import Device, User
 from efficharge.db.session import make_engine, make_sessionmaker
 from efficharge.users_cli import add_user
 from efficharge.web.app import create_app
-from efficharge.web.auth import ip_limiter, login_limiter, register_limiter
+from efficharge.web.auth import reset_limiters
 
 ADMIN = "boss@example.org"
 
@@ -36,9 +36,7 @@ def beta(tmp_path):
         admins=frozenset({ADMIN}),
         support_email="help@example.org",
     )
-    login_limiter._hits.clear()
-    ip_limiter._hits.clear()
-    register_limiter._hits.clear()
+    reset_limiters()
     app = create_app(cfg, start_workers=False)
     with TestClient(app, headers={"accept-language": "en"}, follow_redirects=False) as c:
         yield c, url

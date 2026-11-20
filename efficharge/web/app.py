@@ -12,6 +12,7 @@ import hashlib
 import logging
 import math
 import re
+import time
 from collections.abc import AsyncIterator, Callable
 from dataclasses import dataclass
 from datetime import UTC, datetime, timedelta
@@ -268,6 +269,12 @@ MAX_PENDING = 50
 
 #: no reading from the plug for this long (polled every 30 s): it is offline or gone
 OFFLINE_AFTER = timedelta(minutes=3)
+#: "refresh" reads the plug through the vendor cloud, which bans accounts that ask too often
+REFRESH_EVERY_S = 10
+#: a one-off "ready by" at most this far ahead (the dashboard offers three days)
+READY_BY_MAX = timedelta(days=14)
+#: deadline rules per plug
+MAX_RULES = 20
 
 
 async def user_plugs(db: AsyncSession, user_id: int) -> list[tuple[Device, bool]]:
@@ -499,6 +506,7 @@ def create_app(
     from efficharge.web.admin import register_admin_routes
 
     app.state.pick_cache = {}
+    app.state.refreshed = {}  # device id → time.monotonic() of its last "refresh"
     register_account_routes(app)
     register_admin_routes(app)
     return app
@@ -516,6 +524,10 @@ class SecurityHeaders:
         (b"x-content-type-options", b"nosniff"),
         (b"referrer-policy", b"same-origin"),
         (b"x-frame-options", b"DENY"),
+        # no camera, microphone, location, … for this site or anything it could load
+        (b"permissions-policy", b"camera=(), microphone=(), geolocation=(), payment=(), usb=()"),
+        # other windows (a link that opened us, or one we open) can't reach into this one
+        (b"cross-origin-opener-policy", b"same-origin"),
     )
 
     HSTS = (b"strict-transport-security", b"max-age=31536000")
@@ -668,21 +680,28 @@ def _routes(app: FastAPI) -> None:
         password: Annotated[str, Form()],
         next: Annotated[str, Form()] = "/devices",
     ):
-        email = email.strip().lower()
+        email = email.strip().lower()[:320]
         ip = _client_ip(request)
+
+        def refuse(status: int, error: str) -> HTMLResponse:
+            return render(request, "login.html", status, next=next, error=error)
+
         if not (auth.login_limiter.hit(f"{ip}|{email}") and auth.ip_limiter.hit(ip)):
-            return render(
-                request,
-                "login.html",
-                429,
-                next=next,
-                error=i18n._("Too many attempts. Please wait 15 minutes."),
-            )
+            logger.warning("login refused: too many attempts from one address")
+            return refuse(429, i18n._("Too many attempts. Please wait 15 minutes."))
+        # Counted for unknown emails too, so the answer doesn't tell which accounts exist.
+        if auth.account_limiter.full(email):
+            logger.warning("login refused: too many wrong passwords for one account this hour")
+            return refuse(429, i18n._("Too many wrong passwords. Please try again in an hour."))
         user = await db.scalar(select(User).where(User.email == email))
-        if user is None or user.is_demo or not auth.verify_password(user.password_hash, password):
-            return render(
-                request, "login.html", 400, next=next, error=i18n._("Email or password is wrong.")
-            )
+        try:
+            ok = auth.check_password(user.password_hash if user else None, password)
+        except auth.Busy:
+            logger.warning("login refused: too many password checks overall")
+            return refuse(429, i18n._("Too many logins right now. Please try again in a minute."))
+        if not ok or user is None or user.is_demo:
+            auth.account_limiter.hit(email)
+            return refuse(400, i18n._("Email or password is wrong."))
         if user.approved_at is None:
             return render(
                 request,
@@ -735,20 +754,30 @@ def _routes(app: FastAPI) -> None:
             error = i18n._("Please enter a valid email address.")
         elif len(password) < auth.MIN_PASSWORD:
             error = i18n._("The password needs at least %(n)d characters.", n=auth.MIN_PASSWORD)
+        elif len(password) > auth.MAX_PASSWORD:
+            error = i18n._("The password can have at most %(n)d characters.", n=auth.MAX_PASSWORD)
         elif not about:
             error = i18n._("Please write a few words about who you are.")
         elif len(about) > ABOUT_MAX:
             error = i18n._("Please keep it under %(n)d characters.", n=ABOUT_MAX)
-        elif await db.scalar(select(User.id).where(User.email == email)):
-            error = i18n._("There already is an account with this email.")
         elif not auth.register_limiter.hit(ip):  # last: typos don't count against a person
             error = i18n._("Too many registrations from your address. Please try again later.")
         if error:
             return render(request, "register.html", 400, error=error, about=about)
+        if await db.scalar(select(User.id).where(User.email == email)):
+            # The same answer as for a new registration: the form must not tell anyone
+            # which emails have an account. The owner knows their account anyway.
+            logger.info("registration for an email that has an account: nothing changed")
+            return render(request, "register.html", done=True)
+        try:
+            password_hash = auth.new_password_hash(password)
+        except auth.Busy:
+            error = i18n._("Too many registrations right now. Please try again in a minute.")
+            return render(request, "register.html", 429, error=error, about=about)
         user = await create_user(
             db,
             email,
-            auth.hash_password(password),
+            password_hash,
             locale=i18n.get_locale(),
             timezone=rt(request).config.default_timezone,
             about=about,
@@ -839,12 +868,21 @@ def _routes(app: FastAPI) -> None:
             case "plugged_in":
                 sup.send(device.id, ManualPlugIn())
             case "refresh":
-                await _refresh(request, device.id)
+                refreshed = request.app.state.refreshed
+                if time.monotonic() - refreshed.get(device.id, -REFRESH_EVERY_S) >= REFRESH_EVERY_S:
+                    refreshed[device.id] = time.monotonic()
+                    await _refresh(request, device.id)
                 return await _status_after(request, device, user)
             case "ready_by" if ready_by:
-                when = datetime.fromisoformat(ready_by).replace(tzinfo=tz)
-                if when <= rt(request).clock_for(device.id)():
+                try:
+                    when = datetime.fromisoformat(ready_by).replace(tzinfo=tz)
+                except ValueError:
+                    raise HTTPException(400, "ready_by must be a date and time") from None
+                now = rt(request).clock_for(device.id)()
+                if when <= now:
                     raise HTTPException(400, "time is in the past")
+                if when > now + READY_BY_MAX:
+                    raise HTTPException(400, "at most 14 days ahead")
                 sup.send(device.id, ReadyBy(when.astimezone(UTC)))
             case _:
                 raise HTTPException(400, "unknown action")
@@ -891,7 +929,11 @@ def _routes(app: FastAPI) -> None:
         # the same limit as the login: a stolen session can't guess the password here
         if not (auth.login_limiter.hit(f"{ip}|{u.email}") and auth.ip_limiter.hit(ip)):
             return RedirectResponse("/settings?delete_error=limit#delete", status_code=303)
-        if not auth.verify_password(u.password_hash, password):
+        try:
+            ok = auth.check_password(u.password_hash, password)
+        except auth.Busy:
+            return RedirectResponse("/settings?delete_error=limit#delete", status_code=303)
+        if not ok:
             return RedirectResponse("/settings?delete_error=password#delete", status_code=303)
         account_ids = (
             await db.scalars(select(DeviceAccount.id).where(DeviceAccount.user_id == u.id))
@@ -1064,6 +1106,8 @@ def _routes(app: FastAPI) -> None:
     ):
         values = rule_values(target, ready_by, within_h, plugged_from, plugged_until, wd)
         count = len(await device_rules(db, device.id))
+        if count >= MAX_RULES:
+            raise HTTPException(400, f"at most {MAX_RULES} rules per plug")
         db.add(DeadlineRuleRow(device_id=device.id, position=count, **values))
         await db.commit()
         return await rules_response(request, db, device)

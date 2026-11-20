@@ -13,7 +13,7 @@ from efficharge.crypto import generate_key
 from efficharge.db.migrate import upgrade
 from efficharge.users_cli import add_user, set_password
 from efficharge.web.app import create_app
-from efficharge.web.auth import demo_limiter, ip_limiter, login_limiter, register_limiter
+from efficharge.web.auth import reset_limiters
 
 
 @pytest.fixture
@@ -28,10 +28,7 @@ def private(tmp_path):
         registration_open=False,
         demo=False,
     )
-    login_limiter._hits.clear()
-    ip_limiter._hits.clear()
-    demo_limiter._hits.clear()
-    register_limiter._hits.clear()
+    reset_limiters()
     app = create_app(cfg, start_workers=False)
     with TestClient(app, headers={"accept-language": "en"}, follow_redirects=False) as c:
         yield c, url

@@ -17,6 +17,8 @@ _hasher = PasswordHasher()  # argon2id with the library's current recommended pa
 _DUMMY_HASH = _hasher.hash("not-a-real-password")
 
 MIN_PASSWORD = 10
+#: longer is no password anyone types: it would only cost hashing time
+MAX_PASSWORD = 1000
 
 
 def hash_password(password: str) -> str:
@@ -88,20 +90,70 @@ class RateLimiter:
 
     def hit(self, key: str) -> bool:
         """Record an attempt. False = over the limit."""
+        hits = self._recent(key)
+        if len(hits) >= self.limit:
+            return False
+        hits.append(time.monotonic())
+        return True
+
+    def full(self, key: str) -> bool:
+        """Over the limit, without recording an attempt."""
+        return len(self._recent(key)) >= self.limit
+
+    def _recent(self, key: str) -> deque[float]:
         now = time.monotonic()
-        for k in [k for k, h in self._hits.items() if h[-1] < now - self.window_s]:
-            del self._hits[k]  # forget idle keys: the dict can't grow without bound
+        for k in [k for k, h in self._hits.items() if not h or h[-1] < now - self.window_s]:
+            del self._hits[k]  # forget idle and empty keys: the dict can't grow without bound
         hits = self._hits[key]
         while hits and hits[0] < now - self.window_s:
             hits.popleft()
-        if len(hits) >= self.limit:
-            return False
-        hits.append(now)
-        return True
+        return hits
 
 
 login_limiter = RateLimiter(limit=10, window_s=15 * 60)  # per IP + email
 ip_limiter = RateLimiter(limit=30, window_s=15 * 60)  # per IP, whatever the email
+#: wrong passwords per account, from all addresses together (guessing from many machines)
+account_limiter = RateLimiter(limit=20, window_s=60 * 60)
 #: against bots: new public demos and registrations per IP and hour
 demo_limiter = RateLimiter(limit=3, window_s=60 * 60)
 register_limiter = RateLimiter(limit=3, window_s=60 * 60)
+#: Every password check or new hash costs ~60 ms of CPU and 64 MB, in the process that
+#: also switches the plugs. At most this many per minute overall: a flood from many
+#: addresses gets "try again" instead of stalling the app.
+password_budget = RateLimiter(limit=60, window_s=60)
+
+LIMITERS = (
+    login_limiter,
+    ip_limiter,
+    account_limiter,
+    demo_limiter,
+    register_limiter,
+    password_budget,
+)
+
+
+def reset_limiters() -> None:
+    """Tests: every limiter empty."""
+    for limiter in LIMITERS:
+        limiter._hits.clear()
+
+
+class Busy(Exception):
+    """Too many password checks right now: answer "try again" without hashing."""
+
+
+def check_password(stored: str | None, password: str) -> bool:
+    """``verify_password`` within the overall budget (raises ``Busy``); an overlong
+    password is simply wrong, without hashing it."""
+    if len(password) > MAX_PASSWORD:
+        return False
+    if not password_budget.hit("all"):
+        raise Busy
+    return verify_password(stored, password)
+
+
+def new_password_hash(password: str) -> str:
+    """``hash_password`` within the overall budget (raises ``Busy``)."""
+    if not password_budget.hit("all"):
+        raise Busy
+    return hash_password(password)

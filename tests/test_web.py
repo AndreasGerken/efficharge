@@ -7,65 +7,11 @@ import re
 import time
 from datetime import UTC, datetime, timedelta
 
-import httpx
-import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import select
 
-from efficharge.config import Config
-from efficharge.crypto import generate_key
-from efficharge.db.migrate import upgrade
 from efficharge.devices.simulated import ALL_CAPS
-from efficharge.energy.client import BASE_URL, EnergyChartsClient
-from efficharge.web.app import create_app
-from efficharge.web.auth import demo_limiter, ip_limiter, login_limiter, register_limiter
-
-
-def energy_api() -> EnergyChartsClient:
-    """48 h of fake data around now: expensive now, cheap in 5 h."""
-    start = int(datetime.now(UTC).replace(minute=0, second=0, microsecond=0).timestamp()) - 3600
-    ts = [start + 900 * i for i in range(48 * 4)]
-    price = [300.0 if not 20 <= i < 36 else 20.0 for i in range(len(ts))]
-    ren = [30.0 if not 20 <= i < 36 else 80.0 for i in range(len(ts))]
-
-    def handler(request: httpx.Request) -> httpx.Response:
-        body = {
-            "/price": {"unix_seconds": ts, "price": price},
-            "/ren_share_forecast": {"unix_seconds": ts, "ren_share": ren},
-            "/co2eq": {"unix_seconds": ts, "co2eq": [400.0] * len(ts)},
-            "/public_power": {"unix_seconds": ts, "production_types": []},
-        }[request.url.path]
-        return httpx.Response(200, json=body)
-
-    http = httpx.AsyncClient(base_url=BASE_URL, transport=httpx.MockTransport(handler))
-    return EnergyChartsClient(http=http, backoff=0)
-
-
-@pytest.fixture
-def client(tmp_path):
-    url = f"sqlite+aiosqlite:///{tmp_path / 'web.db'}"
-    upgrade(url)
-    cfg = Config(
-        database_url=url,
-        data_keys=f"k1:{generate_key()}",
-        secret_key="test-secret-" + "x" * 40,
-        cookie_secure=False,
-        registration_open=True,
-        demo=True,
-        poll_interval=timedelta(milliseconds=50),
-    )
-    login_limiter._hits.clear()
-    ip_limiter._hits.clear()
-    demo_limiter._hits.clear()
-    register_limiter._hits.clear()
-    app = create_app(cfg, energy_client=energy_api())
-    with TestClient(app, headers={"accept-language": "en"}) as c:
-        # the first energy fetch runs in the background: tests expect its prices
-        deadline = time.monotonic() + 5
-        while app.state.rt.fetcher.last_success is None:
-            assert time.monotonic() < deadline, "no energy data after 5 s"
-            time.sleep(0.01)
-        yield c
+from efficharge.web.auth import reset_limiters
 
 
 def csrf(c: TestClient, path: str) -> str:
@@ -1242,7 +1188,7 @@ def test_registration_honeypot_limit_and_cap(client, monkeypatch):
     assert r.status_code == 400 and "Too many registrations" in r.text
 
     # at most MAX_PENDING waiting, whatever the address
-    register_limiter._hits.clear()
+    reset_limiters()
     monkeypatch.setattr(web_app, "MAX_PENDING", 3)
     r = form(5)
     assert r.status_code == 400 and "Registration is full right now" in r.text

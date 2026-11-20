@@ -940,8 +940,6 @@ msgstr ""
 "Der Hersteller hat die Anmeldung abgelehnt: zu viele Anmeldungen. Bitte "
 "warte etwas und versuch es dann nochmal."
 
-msgid "There already is an account with this email."
-msgstr "Für diese E-Mail gibt es schon ein Konto."
 
 msgid ""
 "This deletes your account, your plug connections with their access "
@@ -1354,3 +1352,15 @@ msgstr "Dein Akku ist dabei nicht in Gefahr: efficharge schaltet nur den Strom f
 
 msgid "If you encounter errors, please email %(email)s."
 msgstr "Wenn dir Fehler auffallen, schreib bitte an %(email)s."
+
+msgid "Too many wrong passwords. Please try again in an hour."
+msgstr "Zu viele falsche Passwörter. Bitte versuch es in einer Stunde noch einmal."
+
+msgid "Too many logins right now. Please try again in a minute."
+msgstr "Gerade melden sich zu viele an. Bitte versuch es in einer Minute noch einmal."
+
+msgid "The password can have at most %(n)d characters."
+msgstr "Das Passwort darf höchstens %(n)d Zeichen haben."
+
+msgid "Too many registrations right now. Please try again in a minute."
+msgstr "Gerade registrieren sich zu viele. Bitte versuch es in einer Minute noch einmal."
