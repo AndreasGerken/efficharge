@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" fill="#2a78d6"/>
+  <!-- bolt kept inside the central 80 % (maskable safe zone) -->
+  <path d="M282 96 L156 286 H244 L222 416 L356 210 H266 Z" fill="#ffffff"/>
+  <circle cx="370" cy="352" r="34" fill="#1baf7a" stroke="#ffffff" stroke-width="10"/>
+</svg>

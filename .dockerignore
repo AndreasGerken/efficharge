@@ -1,0 +1,8 @@
+# only what the image needs (see Dockerfile); never local data or keys
+*
+!pyproject.toml
+!uv.lock
+!README.md
+!LICENSE
+!efficharge/
+**/__pycache__

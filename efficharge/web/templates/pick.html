@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% from "_macros.html" import back_link with context %}
+{% block title %}{{ _("Choose your plug") }}{% endblock %}
+{% block content %}
+{{ back_link("/settings#plugs") }}
+<h1>{{ _("Which plug charges your battery?") }}</h1>
+{% if error %}<p class="error" role="alert">{{ error }} <a href="/accounts/{{ account.id }}/pick">{{ _("Try again") }}</a></p>{% endif %}
+{% if devices and not usable %}
+<p class="warning" role="status">{{ _("None of your plugs can measure power.") }}
+  {{ _("Efficharge works only with Meross plugs that measure power: MSS305, MSS310 or MSS315.") }}</p>
+{% endif %}
+{% for d, metered in devices %}
+<section class="card{% if not metered %} unsupported{% endif %}">
+  <h2>{{ d.name }}</h2>
+  {% if not metered %}
+  <p class="small-note">{{ _("Can't measure power: efficharge doesn't work with this plug.") }}</p>
+  {% else %}
+  <p class="muted small-note">
+    {% if d.online %}{{ _("online") }}{% else %}{{ _("not reachable right now") }}{% endif %} ·
+    {{ _("measures power: plugging in is detected automatically") }}
+  </p>
+  {% if d.device_id in added %}
+  <p>{{ _("Already added.") }}</p>
+  {% else %}
+  <form method="post" action="/accounts/{{ account.id }}/pick" class="rule-form">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <input type="hidden" name="vendor_device_id" value="{{ d.device_id }}">
+    <label>{{ _("A full charge takes about (hours)") }} <input type="number" name="default_hours" min="0.25" max="24" step="0.25" value="3"></label>
+    <button class="button primary">{{ _("Use this plug") }}</button>
+  </form>
+  {% endif %}
+  {% endif %}
+</section>
+{% else %}
+{% if not error %}
+<section class="card">
+  <p>✔ {{ _("Your account is connected, but it has no plugs right now.") }}</p>
+  <p class="muted">{{ _("Set up the plug in the Meross app first and check that it is online there. Then search again.") }}</p>
+</section>
+{% endif %}
+{% endfor %}
+<p class="actions">
+  <a class="button" href="/accounts/{{ account.id }}/pick?refresh=1">🔄 {{ _("Search again") }}</a>
+</p>
+{% endblock %}

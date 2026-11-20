@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% from "_macros.html" import back_link with context %}
+{% block title %}{{ _("Admin") }}{% endblock %}
+{% block content %}
+{{ back_link("/settings") }}
+<h1>{{ _("Admin") }}</h1>
+{% if done == "approved" %}<p class="notice" role="status">✓ {{ _("Accepted: they can log in now.") }}</p>
+{% elif done == "rejected" %}<p class="notice" role="status">✓ {{ _("Registration deleted.") }}</p>{% endif %}
+
+<section class="card stack" id="waiting">
+  <h2>{{ _("Waiting for approval") }}</h2>
+  {% for u, when in waiting %}
+  <div class="admin-entry">
+    <p><strong>{{ u.email }}</strong> <span class="muted small-note">{{ when }}</span></p>
+    <p class="admin-about">{{ u.about or "–" }}</p>
+    <div class="actions">
+      <form method="post" action="/admin/users/{{ u.id }}/approve" class="inline">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+        <button class="button primary small">{{ _("Accept") }}</button>
+      </form>
+      <form method="post" action="/admin/users/{{ u.id }}/reject" class="inline"
+            hx-post="/admin/users/{{ u.id }}/reject"
+            hx-confirm="{{ _('Delete the registration of %(email)s?', email=u.email) }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+        <button class="button small">{{ _("Reject") }}</button>
+      </form>
+    </div>
+  </div>
+  {% else %}
+  <p class="muted">{{ _("No registrations waiting.") }}</p>
+  {% endfor %}
+</section>
+
+<section class="card stack" id="users">
+  <h2>{{ _("Accounts") }} <span class="muted">({{ users|length }})</span></h2>
+  {% if demos is not none %}<p class="muted small-note">{{ ngettext("%(num)d public demo running", "%(num)d public demos running", demos) }}</p>{% endif %}
+  <ul class="admin-users">
+    {% for u, when, plugs, charges in users %}
+    <li><strong>{{ u.email }}</strong>
+      <span class="muted small-note">{{ _("Accepted") }} {{ when }} · {{ _("Plugs") }}: {{ plugs }} · {{ _("Charges") }}: {{ charges }}</span></li>
+    {% endfor %}
+  </ul>
+  <p class="muted small-note">{{ _("Plugs: real plugs only. Charges: finished ones, also on virtual plugs.") }}</p>
+</section>
+{% endblock %}

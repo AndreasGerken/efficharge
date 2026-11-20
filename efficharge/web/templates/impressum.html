@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% from "_macros.html" import back_link with context %}
+{% block title %}{{ _("Imprint") }}{% endblock %}
+{% block content %}
+{{ back_link("/", history=true) }}
+<section class="card legal">
+  <h1>{{ _("Imprint") }}</h1>
+  <p class="muted">{{ _("Information according to § 5 DDG") }}</p>
+  <p>{{ imprint.imprint_name }}<br>{{ imprint.imprint_address }}</p>
+  <h2>{{ _("Contact") }}</h2>
+  <p>{{ _("Email:") }} <a href="mailto:{{ imprint.imprint_email }}">{{ imprint.imprint_email }}</a></p>
+  <h2>{{ _("Sources") }}</h2>
+  <p>{{ _("Electricity prices, green-power share and CO₂ data:") }} {{ attribution }}</p>
+</section>
+{% endblock %}

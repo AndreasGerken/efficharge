@@ -1,0 +1,4 @@
+<p class="planned" id="planned" role="status">
+  <strong>{% if learned_from %}{{ ngettext("Currently planned: %(duration)s (from your estimate and %(num)d charge).", "Currently planned: %(duration)s (from your estimate and %(num)d charges).", learned_from, duration=fmt_duration(planned_duration)) }}{% else %}{{ _("Currently planned: %(duration)s (your estimate).", duration=fmt_duration(planned_duration)) }}{% endif %}</strong>
+  {% if saved %}<span class="save-status">✓ {{ _("Saved.") }}</span>{% endif %}
+</p>

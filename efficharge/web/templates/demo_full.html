@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}{{ _("Demo") }}{% endblock %}
+{% block content %}
+<section class="narrow card">
+  {% if too_many %}
+  <h1>{{ _("That's a lot of demos") }}</h1>
+  <p>{{ _("Several demos were started from your address within the last hour. Please try again later.") }}</p>
+  {% else %}
+  <h1>{{ _("The demo is busy") }}</h1>
+  <p>{{ _("Many people are trying the demo right now. Please try again in a few minutes.") }}</p>
+  <a class="button primary" href="/demo">{{ _("Try again") }}</a>
+  {% endif %}
+</section>
+{% endblock %}

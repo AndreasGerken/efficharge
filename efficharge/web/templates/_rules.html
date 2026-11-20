@@ -1,0 +1,38 @@
+{% from "_macros.html" import rule_fields, within_select %}
+<div id="rules-list">
+  {% for a, b, days in overlaps %}
+  <p class="warning" role="alert">⚠ {{ _("Rules %(a)d and %(b)d overlap on %(days)s. Rule %(a)d wins there.", a=a, b=b, days=days) }}</p>
+  {% endfor %}
+  {% if rules_saved %}<p class="notice small-note" role="status">{{ _("Saved. The plan is updated.") }}</p>{% endif %}
+  <ol class="rules">
+    {% for r in rules %}
+    <li id="rule-{{ r.id }}">
+      <div class="rule-line">
+        <span>{{ rule_text(r) }}</span>
+        <button class="icon-button" title="{{ _('Delete') }}" aria-label="{{ _('Delete') }}" hx-post="/devices/{{ device.id }}/rules/{{ r.id }}/delete" hx-target="#rules-list" hx-swap="outerHTML">🗑️</button>
+      </div>
+      {# the summary (pencil) sits at the right end of the line, the form opens below #}
+      <details class="rule-edit" {% if edit_rule == r.id|string %}open{% endif %}>
+        <summary class="icon-button" title="{{ _('Edit') }}" aria-label="{{ _('Edit') }}">✏️</summary>
+        <form class="rule-form" hx-post="/devices/{{ device.id }}/rules/{{ r.id }}" hx-target="#rules-list" hx-swap="outerHTML">
+          {{ rule_fields(r.weekdays, r.plugged_from, r.plugged_until, r.ready_by, r.within_min) }}
+          <button class="button small">{{ _("Save") }}</button>
+        </form>
+      </details>
+    </li>
+    {% endfor %}
+    {# always there, can't be deleted: applies when no rule above matches #}
+    <li id="rule-fallback" class="fallback">
+      <div class="rule-line">
+        <span>{{ fallback_text(s.fallback_within_min) }}</span>
+      </div>
+      <details class="rule-edit" {% if edit_rule == "fallback" %}open{% endif %}>
+        <summary class="icon-button" title="{{ _('Edit') }}" aria-label="{{ _('Edit') }}">✏️</summary>
+        <form class="rule-form" hx-post="/devices/{{ device.id }}/rules/fallback" hx-target="#rules-list" hx-swap="outerHTML">
+          {{ within_select(s.fallback_within_min, _("If no rule matches: ready within")) }}
+          <button class="button small">{{ _("Save") }}</button>
+        </form>
+      </details>
+    </li>
+  </ol>
+</div>

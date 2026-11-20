@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+{% from "_macros.html" import language_links, logout_button, meross_models with context %}
+{% block title %}{{ _("Settings") }}{% endblock %}
+{% block content %}
+<h1>{{ _("Settings") }}</h1>
+{% if waiting is not none %}
+<p class="notice" role="status"><a href="/admin">{{ _("Admin") }}</a>: {% if waiting %}{{ ngettext("%(num)d registration waiting", "%(num)d registrations waiting", waiting) }}{% else %}{{ _("no registrations waiting") }}{% endif %}</p>
+{% endif %}
+{# Every field saves on change (htmx); without JavaScript the noscript buttons do. #}
+
+{% macro virtual_button(label) -%}
+<form method="post" action="/accounts/virtual" class="inline">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+  <button class="button">{{ label }}</button>
+</form>
+{%- endmacro %}
+
+{% if removed == "on" %}<p class="notice" role="status">✓ {{ _("Plug removed. It is switched on and works as a normal plug again.") }}</p>
+{% elif removed == "off" %}<p class="warning" role="alert">{{ _("Plug removed, but efficharge couldn't switch it on (offline?). If a battery is connected, switch the plug on in its app or with its button.") }}</p>{% endif %}
+
+{# where you stand, and what's next: the welcome for a new account #}
+{% if not is_demo %}
+<section class="card stack plug-state {{ plug_state }}"{% if plug_state == "welcome" %} id="plugs"{% endif %}>
+  {% if plug_state == "welcome" %}
+  <h2><img src="/static/icons/icon.svg" alt="" width="32" height="32"> {{ _("Welcome to efficharge!") }}</h2>
+  <p>{{ _("Two steps, and your battery charges when electricity is cheap and green: connect your Meross account, then pick the plug your charger is on.") }}</p>
+  {{ meross_models() }}
+  <div class="actions">
+    {% for kind, name in kinds.items() %}<a class="button primary" href="/accounts/connect/{{ kind }}">{{ _("Connect %(name)s", name=name) }}</a>{% endfor %}
+    {{ virtual_button(_("Try a virtual plug first")) }}
+  </div>
+  <p class="muted small-note">{{ _("No plug at hand yet? The virtual plug simulates a plug and a battery on today's real prices, with fast-forward. Remove it whenever you like.") }}</p>
+  {% elif plug_state == "pick" %}
+  {% set a = account_without_plug %}
+  <h2>{{ _("Next: pick your plug") }}</h2>
+  <p>{{ _("Your %(name)s account is connected. Now add the plug your charger is on.", name=kinds.get(a.kind, a.kind)) }}</p>
+  <div class="actions"><a class="button primary" href="/accounts/{{ a.id }}/pick">{{ _("Add a plug") }}</a></div>
+  {% elif plug_state == "expired" %}
+  {% set a = expired_account %}
+  <h2>{{ _("Please log in again") }}</h2>
+  <p>{{ _("The connection to %(name)s has expired. Until you log in again, efficharge can't switch your plug.", name=kinds.get(a.kind, a.kind)) }}</p>
+  <div class="actions"><a class="button primary" href="/accounts/connect/{{ a.kind }}?account={{ a.id }}">{{ _("Reconnect") }}</a></div>
+  {% elif plug_state == "trying" %}
+  <h2>{{ _("You're trying a virtual plug") }}</h2>
+  <p>{{ _("When your real plug is ready: connect your Meross account, then pick the plug your charger is on.") }}</p>
+  {{ meross_models() }}
+  <div class="actions">
+    {% for kind, name in kinds.items() %}<a class="button primary" href="/accounts/connect/{{ kind }}">{{ _("Connect %(name)s", name=name) }}</a>{% endfor %}
+    <a class="button" href="/devices/{{ virtual_plug.id }}">{{ _("Open the virtual plug") }}</a>
+  </div>
+  {% else %}
+  <h2>✓ {{ _("All set") }}</h2>
+  <p>{% if real_plugs == 1 %}{{ _("Efficharge switches your plug.") }}{% else %}{{ _("Efficharge switches your %(num)d plugs.", num=real_plugs) }}{% endif %}
+    {{ _("Plug in your battery as usual: it charges when electricity is cheap and green.") }}</p>
+  <div class="actions"><a class="button" href="/devices">{{ _("Dashboard") }}</a></div>
+  {% endif %}
+</section>
+{% endif %}
+
+{% if plug_state != "welcome" or is_demo %}
+<section class="card stack" id="plugs">
+  <h2>{{ _("Plugs") }}</h2>
+  {% for a in accounts %}
+  <div class="plug-account">
+    <div class="plug-line">
+      <strong>{% if a.kind == "simulated" %}{{ _("Virtual plug") }}{% else %}{{ kinds.get(a.kind, a.kind) }}{% endif %}</strong>
+      {% if not is_demo %}
+      <form method="post" action="/accounts/{{ a.id }}/delete" class="inline">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+        <button class="icon-button" title="{{ _('Remove') }}" aria-label="{{ _('Remove') }}">🗑️</button>
+      </form>
+      {% endif %}
+    </div>
+    {% if a.kind == "simulated" %}
+    <p class="muted small-note">{{ _("Simulated plug and battery to try everything out.") }}</p>
+    {% elif a.status == "ok" %}
+    <p class="connected small-note">✔ {% if logins[a.id] %}{{ _("Connected as %(email)s", email=logins[a.id]) }}{% else %}{{ _("Connected") }}{% endif %}</p>
+    {% else %}
+    <p class="error" role="alert">{{ _("The connection has expired. Log in again to continue.") }}
+      <a class="button small" href="/accounts/connect/{{ a.kind }}?account={{ a.id }}">{{ _("Reconnect") }}</a></p>
+    {% endif %}
+    <ul class="plugs">
+      {% for d in by_account[a.id] %}
+      <li class="plug-line">
+        <a href="/devices/{{ d.id }}">{{ d.name }}</a>
+        <span class="icons">
+          <a class="icon-button" href="/devices/{{ d.id }}/settings" title="{{ _('Plug settings') }}" aria-label="{{ _('Plug settings') }}">⚙️</a>
+          <a class="icon-button" href="/devices/{{ d.id }}" title="{{ _('Dashboard') }}" aria-label="{{ _('Dashboard') }}">→</a>
+        </span>
+      </li>
+      {% else %}<li class="muted">{{ _("No plug added yet.") }}</li>{% endfor %}
+    </ul>
+    {% if a.kind != "simulated" %}<a class="button small" href="/accounts/{{ a.id }}/pick">{{ _("Add a plug") }}</a>{% endif %}
+  </div>
+  {% endfor %}
+  <h3>{% if has_real_plug_account %}{{ _("Connect another account") }}{% else %}{{ _("Connect a smart plug account") }}{% endif %}</h3>
+  {% if is_demo %}
+  <a class="button primary" href="{{ '/register' if registration_open else '/login' }}">{{ _("Create an account to connect your real plug") }}</a>
+  {% else %}
+  <div class="actions">
+    {% for kind, name in kinds.items() %}<a class="button{% if not has_real_plug_account %} primary{% endif %}" href="/accounts/connect/{{ kind }}">{{ name }}</a>{% endfor %}
+    {% if not virtual_plug %}{{ virtual_button(_("Add a virtual plug")) }}{% endif %}
+  </div>
+  {% endif %}
+  <p class="muted small-note">{{ _("More brands will follow. Tapo works via Home Assistant later.") }}</p>
+</section>
+{% endif %}
+
+<section class="card stack" id="account">
+  <h2>{{ _("Account") }}</h2>
+  {% if is_demo %}
+  <p>{{ _("Language") }}: {{ language_links() }}</p>
+  {{ logout_button(true) }}
+  {% else %}
+  <form method="post" action="/settings/account" class="stack"
+        hx-post="/settings/account" hx-trigger="change">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <p class="muted">{{ user.email }}</p>
+    <label>{{ _("Language") }}
+      <select name="locale">
+        <option value="de" {% if user.locale == "de" %}selected{% endif %}>Deutsch</option>
+        <option value="en" {% if user.locale == "en" %}selected{% endif %}>English</option>
+      </select></label>
+    <label>{{ _("Time zone") }}
+      <select name="timezone">{% for z in timezones %}<option {% if z == user.timezone %}selected{% endif %}>{{ z }}</option>{% endfor %}</select></label>
+    <noscript><button class="button primary">{{ _("Save") }}</button></noscript>
+  </form>
+  {{ logout_button(false) }}
+  <details class="danger-zone" id="delete" {% if delete_error %}open{% endif %}>
+    <summary>{{ _("Delete account") }}</summary>
+    <form method="post" action="/settings/delete" class="stack">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+      <p>{{ _("This deletes your account, your plug connections with their access tokens, all settings and every charge, right away. It can't be undone.") }}</p>
+      <p class="muted small-note">{{ _("Your Meross account itself stays. To also end our access there, change your Meross password.") }}</p>
+      {% if delete_error %}<p class="error" role="alert">{{ delete_error }}</p>{% endif %}
+      <label>{{ _("Your password, to confirm") }} <input type="password" name="password" autocomplete="current-password" required></label>
+      <button class="button danger">{{ _("Delete my account") }}</button>
+    </form>
+  </details>
+  {% endif %}
+</section>
+{% endblock %}

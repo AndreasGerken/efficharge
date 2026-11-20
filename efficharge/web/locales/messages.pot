@@ -1,0 +1,1237 @@
+#, python-format
+msgid "%(change)s green power"
+msgstr ""
+
+#, python-format
+msgid "%(d)s charged"
+msgstr ""
+
+#, python-format
+msgid "%(d)s estimated charge time"
+msgstr ""
+
+#, python-format
+msgid "%(grams)s g CO₂ avoided"
+msgstr ""
+
+#, python-format
+msgid "%(h)d h"
+msgstr ""
+
+#, python-format
+msgid "%(h)d h %(m)d min"
+msgstr ""
+
+#, python-format
+msgid "%(m)d min"
+msgstr ""
+
+#, python-format
+msgid "%(money)s saved"
+msgstr ""
+
+#, python-format
+msgid "%(money)s saved, %(grams)s g CO₂ avoided"
+msgstr ""
+
+#, python-format
+msgid "%(name)s email"
+msgstr ""
+
+#, python-format
+msgid "%(name)s password"
+msgstr ""
+
+#, python-format
+msgid "%(num)d public demo running"
+msgid_plural "%(num)d public demos running"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%(num)d registration waiting"
+msgid_plural "%(num)d registrations waiting"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%(wh)s Wh"
+msgstr ""
+
+msgid "A full charge takes about (hours)"
+msgstr ""
+
+msgid "About"
+msgstr ""
+
+#, python-format
+msgid "About %(d)s left (done around %(t)s)."
+msgstr ""
+
+msgid "About efficharge"
+msgstr ""
+
+msgid "Accept"
+msgstr ""
+
+msgid "Accepted"
+msgstr ""
+
+msgid "Accepted: they can log in now."
+msgstr ""
+
+msgid "Account"
+msgstr ""
+
+msgid "Accounts"
+msgstr ""
+
+msgid "Add a plug"
+msgstr ""
+
+msgid "Add a rule"
+msgstr ""
+
+msgid "Add a virtual plug"
+msgstr ""
+
+msgid "Add rule"
+msgstr ""
+
+msgid "Admin"
+msgstr ""
+
+msgid "All charges"
+msgstr ""
+
+msgid "All set"
+msgstr ""
+
+msgid "Already added."
+msgstr ""
+
+msgid "Amp-hours (Ah)"
+msgstr ""
+
+msgid "An example charge"
+msgstr ""
+
+msgid "Any time"
+msgstr ""
+
+msgid "Average charge time"
+msgstr ""
+
+msgid "Back"
+msgstr ""
+
+msgid "Back to now"
+msgstr ""
+
+msgid "Balanced"
+msgstr ""
+
+msgid "Battery ready"
+msgstr ""
+
+msgid "Battery taken off"
+msgstr ""
+
+msgid "Beta. Free to use and open source. No ads, no tracking cookies."
+msgstr ""
+
+msgid ""
+"Beta: every registration is checked by hand. Once you're in, connect your"
+" Meross account and pick your plug."
+msgstr ""
+
+msgid "Buy me a coffee"
+msgstr ""
+
+msgid "CO₂ avoided"
+msgstr ""
+
+msgid "CO₂ avoided (total)"
+msgstr ""
+
+msgid "Can't measure power: efficharge doesn't work with this plug."
+msgstr ""
+
+msgid "Capacity (Wh)"
+msgstr ""
+
+#, python-format
+msgid "Charge from %(when)s deleted."
+msgstr ""
+
+msgid "Charge now"
+msgstr ""
+
+msgid "Charge when power is cheap and green"
+msgstr ""
+
+msgid "Charge your battery when electricity is cheap and green."
+msgstr ""
+
+msgid "Charger detected"
+msgstr ""
+
+msgid "Charger power"
+msgstr ""
+
+msgid "Charges"
+msgstr ""
+
+msgid "Charging"
+msgstr ""
+
+msgid "Charging again after your pause."
+msgstr ""
+
+#, python-format
+msgid "Charging in the planned window %(start)s–%(end)s."
+msgstr ""
+
+msgid "Charging now: no prices are known yet for the time until your deadline."
+msgstr ""
+
+#, python-format
+msgid ""
+"Charging now: right now is the best mix of green power and price before "
+"%(deadline)s."
+msgstr ""
+
+#, python-format
+msgid ""
+"Charging now: right now is the cheapest and greenest time before "
+"%(deadline)s."
+msgstr ""
+
+#, python-format
+msgid "Charging now: right now is the cheapest time before %(deadline)s."
+msgstr ""
+
+#, python-format
+msgid "Charging now: right now is the greenest time before %(deadline)s."
+msgstr ""
+
+#, python-format
+msgid ""
+"Charging now: the battery needs about %(duration)s and should be ready at"
+" %(deadline)s. There isn't enough time for a cheaper window. Adjust the "
+"deadline rules if this happens often."
+msgstr ""
+
+#, python-format
+msgid ""
+"Charging now: the best window starts at %(start)s, only a few minutes "
+"away, so waiting isn't worth it."
+msgstr ""
+
+#, python-format
+msgid "Charging would start at %(t)s."
+msgstr ""
+
+msgid "Charging would start right away."
+msgstr ""
+
+msgid "Charging."
+msgstr ""
+
+msgid "Choose your plug"
+msgstr ""
+
+msgid "Compared with charging right at plug-in."
+msgstr ""
+
+msgid "Connect"
+msgstr ""
+
+#, python-format
+msgid "Connect %(name)s"
+msgstr ""
+
+msgid "Connect a smart plug account"
+msgstr ""
+
+msgid "Connect another account"
+msgstr ""
+
+msgid "Connect your plug"
+msgstr ""
+
+msgid "Connect your real plug"
+msgstr ""
+
+msgid "Connected"
+msgstr ""
+
+#, python-format
+msgid "Connected as %(email)s"
+msgstr ""
+
+msgid "Contact"
+msgstr ""
+
+#, python-format
+msgid "Cost %(money)s"
+msgstr ""
+
+#, python-format
+msgid "Cost %(money)s (%(change)s)"
+msgstr ""
+
+msgid "Cost first"
+msgstr ""
+
+msgid "Could not reach your plugs. Please try again in a minute."
+msgstr ""
+
+msgid "Create account"
+msgstr ""
+
+msgid "Create an account"
+msgstr ""
+
+msgid "Create an account to connect your real plug"
+msgstr ""
+
+#, python-format
+msgid "Currently planned: %(duration)s (from your estimate and %(num)d charge)."
+msgid_plural "Currently planned: %(duration)s (from your estimate and %(num)d charges)."
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "Currently planned: %(duration)s (your estimate)."
+msgstr ""
+
+msgid "Custom setting"
+msgstr ""
+
+msgid "Dashboard"
+msgstr ""
+
+msgid "Day"
+msgstr ""
+
+msgid "Days"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Delete account"
+msgstr ""
+
+msgid "Delete my account"
+msgstr ""
+
+#, python-format
+msgid "Delete the charge from %(when)s (%(wh)s Wh) from the statistics?"
+msgstr ""
+
+#, python-format
+msgid "Delete the registration of %(email)s?"
+msgstr ""
+
+msgid "Demo"
+msgstr ""
+
+msgid "Done any moment now."
+msgstr ""
+
+msgid ""
+"Each charge is compared with charging right when you plugged in. Money is"
+" the difference in the exchange price, so it is real money with a dynamic"
+" tariff. CO₂ comes from the grid's emissions at the time of charging."
+msgstr ""
+
+msgid "Eco and cost agree"
+msgstr ""
+
+msgid "Eco and cost disagree today"
+msgstr ""
+
+msgid "Eco first"
+msgstr ""
+
+msgid "Eco or cost first"
+msgstr ""
+
+msgid "Edit"
+msgstr ""
+
+msgid "Efficharge is a hobby project, free to use."
+msgstr ""
+
+msgid ""
+"Efficharge is in a private beta: every registration is checked by hand, "
+"then you can log in."
+msgstr ""
+
+msgid ""
+"Efficharge moves the charge into the best hours for you, every time, "
+"without you thinking about it."
+msgstr ""
+
+msgid "Efficharge plans the cheapest and greenest time to charge."
+msgstr ""
+
+msgid ""
+"Efficharge sees the charger start drawing power and switches the plug off"
+" for now."
+msgstr ""
+
+msgid ""
+"Efficharge starts with your estimate. At first it counts like three "
+"charges, so one unusual charge barely changes the plan. Every finished "
+"charge is added, and the planner uses the time 9 of 10 charges were done "
+"in. After about 10 charges the measured times decide."
+msgstr ""
+
+#, python-format
+msgid ""
+"Efficharge stops controlling %(name)s and switches it on, so a waiting "
+"battery still charges. Its charges, rules and readings are deleted. The "
+"plug itself and your other plugs stay as they are."
+msgstr ""
+
+#, python-format
+msgid "Efficharge switches your %(num)d plugs."
+msgstr ""
+
+msgid "Efficharge switches your plug."
+msgstr ""
+
+msgid ""
+"Efficharge works only with Meross plugs that measure power: MSS305, "
+"MSS310 or MSS315."
+msgstr ""
+
+msgid "Electricity price"
+msgstr ""
+
+msgid "Electricity prices, green-power share and CO₂ data:"
+msgstr ""
+
+msgid "Email"
+msgstr ""
+
+msgid "Email or password is wrong."
+msgstr ""
+
+msgid "Email:"
+msgstr ""
+
+msgid "Energy"
+msgstr ""
+
+msgid "Energy data:"
+msgstr ""
+
+#, python-format
+msgid "Estimated %(change)s cost"
+msgstr ""
+
+#, python-format
+msgid "Estimated %(change)s green power"
+msgstr ""
+
+#, python-format
+msgid "Estimated cost %(money)s"
+msgstr ""
+
+#, python-format
+msgid "Estimated cost %(money)s (%(change)s)"
+msgstr ""
+
+msgid "Fast-forward"
+msgstr ""
+
+msgid ""
+"For electricity in Germany and Luxembourg. With a dynamic tariff you save"
+" money and CO₂, with a fixed price you still save CO₂."
+msgstr ""
+
+msgid ""
+"For now the price alone decides: the green-power forecast doesn't reach "
+"far enough yet."
+msgstr ""
+
+msgid ""
+"For now with Meross smart plugs with power metering (e.g. MSS305, "
+"MSS310). More brands to come."
+msgstr ""
+
+msgid "Free and open source"
+msgstr ""
+
+msgid ""
+"From the exchange prices and the green-power forecast, before your "
+"deadline, e.g. “ready by 7:00”."
+msgstr ""
+
+msgid "Green forecast not possible yet"
+msgstr ""
+
+#, python-format
+msgid "Green power (%%)"
+msgstr ""
+
+msgid "Green power and price count equally."
+msgstr ""
+
+msgid "Green power share"
+msgstr ""
+
+msgid "How is this calculated?"
+msgstr ""
+
+msgid "How it works"
+msgstr ""
+
+msgid "I plugged in"
+msgstr ""
+
+msgid "I use two-factor authentication"
+msgstr ""
+
+msgid "If no rule matches: ready within"
+msgstr ""
+
+#, python-format
+msgid "If you encounter errors, please email %(email)s."
+msgstr ""
+
+msgid "If you like the project, feel free to support me."
+msgstr ""
+
+msgid "Imprint"
+msgstr ""
+
+msgid "Information according to § 5 DDG"
+msgstr ""
+
+msgid "It finds the best window"
+msgstr ""
+
+msgid ""
+"It works with any dumb charger that starts charging as soon as it gets "
+"power. It pays off for larger batteries you charge regularly: for the "
+"climate in any case, and with a dynamic electricity tariff financially "
+"for you too."
+msgstr ""
+
+msgid "Language"
+msgstr ""
+
+msgid "Last charge"
+msgstr ""
+
+msgid "Leave demo"
+msgstr ""
+
+msgid "Log in"
+msgstr ""
+
+#, python-format
+msgid "Log in with your %(name)s app account."
+msgstr ""
+
+msgid ""
+"Log in with your smart-plug app account once and pick the plug your "
+"charger is on."
+msgstr ""
+
+msgid "Log out"
+msgstr ""
+
+msgid "Login failed. Please try again later."
+msgstr ""
+
+msgid "Lowest price. Pays off with a dynamic tariff."
+msgstr ""
+
+msgid ""
+"Many people are trying the demo right now. Please try again in a few "
+"minutes."
+msgstr ""
+
+msgid "Money saved"
+msgstr ""
+
+msgid "Money saved (total)"
+msgstr ""
+
+msgid "More brands will follow. Tapo works via Home Assistant later."
+msgstr ""
+
+msgid "Most green power. Price breaks ties."
+msgstr ""
+
+msgid "Need it now?"
+msgstr ""
+
+msgid "Need it now? Press the plug button."
+msgstr ""
+
+msgid "Next: pick your plug"
+msgstr ""
+
+msgid "No account yet?"
+msgstr ""
+
+msgid "No charges yet. They show up here as soon as a battery is plugged in."
+msgstr ""
+
+msgid "No connection"
+msgstr ""
+
+msgid "No plug added yet."
+msgstr ""
+
+msgid ""
+"No plug at hand yet? The virtual plug simulates a plug and a battery on "
+"today's real prices, with fast-forward. Remove it whenever you like."
+msgstr ""
+
+msgid "No registrations waiting."
+msgstr ""
+
+msgid "None of your plugs can measure power."
+msgstr ""
+
+msgid "Normal speed"
+msgstr ""
+
+msgid "Offline"
+msgstr ""
+
+#, python-format
+msgid "Once: ready by %(t)s"
+msgstr ""
+
+msgid "Open the virtual plug"
+msgstr ""
+
+msgid "Or enter what is printed on the battery:"
+msgstr ""
+
+msgid "Or look around in the demo"
+msgstr ""
+
+msgid "Otherwise"
+msgstr ""
+
+msgid "Password"
+msgstr ""
+
+msgid "Password (at least 10 characters)"
+msgstr ""
+
+msgid "Paused"
+msgstr ""
+
+msgid "Paused by you"
+msgstr ""
+
+#, python-format
+msgid ""
+"Planned with the forecasts known so far: %(start)s–%(end)s. New forecasts"
+" come during the day, the plan may get better then."
+msgstr ""
+
+msgid "Please enter a valid email address."
+msgstr ""
+
+#, python-format
+msgid "Please keep it under %(n)d characters."
+msgstr ""
+
+msgid "Please log in again"
+msgstr ""
+
+msgid "Please write a few words about who you are."
+msgstr ""
+
+msgid "Plug in a battery"
+msgstr ""
+
+msgid "Plug in and forget"
+msgstr ""
+
+msgid "Plug in as usual"
+msgstr ""
+
+msgid ""
+"Plug in your battery as usual: it charges when electricity is cheap and "
+"green."
+msgstr ""
+
+#, python-format
+msgid ""
+"Plug offline since %(t)s: efficharge can't read or switch it. Check that "
+"it is online in the plug's app; efficharge reconnects by itself."
+msgstr ""
+
+msgid ""
+"Plug removed, but efficharge couldn't switch it on (offline?). If a "
+"battery is connected, switch the plug on in its app or with its button."
+msgstr ""
+
+msgid "Plug removed. It is switched on and works as a normal plug again."
+msgstr ""
+
+msgid "Plug settings"
+msgstr ""
+
+msgid "Plug switched off"
+msgstr ""
+
+#, python-format
+msgid ""
+"Plugged in at %(plugged)s, the battery had to be ready by %(ready)s. "
+"Efficharge waited for the sunny midday hours and charged from %(start)s "
+"to %(end)s."
+msgstr ""
+
+msgid "Plugged in from"
+msgstr ""
+
+msgid "Plugs"
+msgstr ""
+
+msgid "Plugs: real plugs only. Charges: finished ones, also on virtual plugs."
+msgstr ""
+
+#, python-format
+msgid "Power now: %(w)s W"
+msgstr ""
+
+msgid "Press the button on the plug. Charging starts right away."
+msgstr ""
+
+msgid "Press the plug button"
+msgstr ""
+
+msgid "Price (ct/kWh)"
+msgstr ""
+
+msgid "Privacy"
+msgstr ""
+
+msgid "Privacy notice"
+msgstr ""
+
+msgid "Read the plug now"
+msgstr ""
+
+msgid "Ready"
+msgstr ""
+
+msgid "Ready by"
+msgstr ""
+
+msgid "Ready to charge"
+msgstr ""
+
+#, python-format
+msgid ""
+"Real exchange prices and measured green-power shares of %(date)s (Energy-"
+"Charts), simulated battery."
+msgstr ""
+
+msgid "Reconnect"
+msgstr ""
+
+msgid "Registration deleted."
+msgstr ""
+
+msgid "Registration is full right now. Please try again in a few days."
+msgstr ""
+
+msgid "Reject"
+msgstr ""
+
+msgid "Remove"
+msgstr ""
+
+msgid "Remove plug"
+msgstr ""
+
+msgid "Remove this plug"
+msgstr ""
+
+msgid "Rule:"
+msgstr ""
+
+#, python-format
+msgid "Rules %(a)d and %(b)d overlap on %(days)s. Rule %(a)d wins there."
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Saved."
+msgstr ""
+
+msgid "Saved. The plan is updated."
+msgstr ""
+
+msgid "Search again"
+msgstr ""
+
+msgid "Set"
+msgstr ""
+
+msgid ""
+"Set up the plug in the Meross app first and check that it is online "
+"there. Then search again."
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+msgid ""
+"Several demos were started from your address within the last hour. Please"
+" try again later."
+msgstr ""
+
+msgid "Show the data as a table"
+msgstr ""
+
+msgid "Simulated plug and battery to try everything out."
+msgstr ""
+
+msgid "Simulation"
+msgstr ""
+
+msgid "Source code"
+msgstr ""
+
+msgid "Sources"
+msgstr ""
+
+msgid "Started in the app"
+msgstr ""
+
+msgid "Started right away: best window"
+msgstr ""
+
+msgid "Started right away: no forecast"
+msgstr ""
+
+msgid "Started right away: rule"
+msgstr ""
+
+msgid "Started with the plug button"
+msgstr ""
+
+msgid "Status"
+msgstr ""
+
+msgid "Stop charging"
+msgstr ""
+
+msgid "Switch the plug on"
+msgstr ""
+
+msgid "Take the battery off"
+msgstr ""
+
+msgid ""
+"Thank you! Your registration is checked by hand. You can log in as soon "
+"as it is accepted."
+msgstr ""
+
+msgid "That's a lot of demos"
+msgstr ""
+
+msgid "The battery is ready"
+msgstr ""
+
+msgid "The connection has expired. Log in again to continue."
+msgstr ""
+
+#, python-format
+msgid ""
+"The connection to %(name)s has expired. Until you log in again, "
+"efficharge can't switch your plug."
+msgstr ""
+
+msgid ""
+"The connection to your plug account has expired. Please reconnect it, "
+"until then efficharge can't switch the plug."
+msgstr ""
+
+msgid "The demo is busy"
+msgstr ""
+
+msgid ""
+"The demo runs a simulated plug and battery on today's real prices. No "
+"account needed."
+msgstr ""
+
+msgid "The first matching rule wins. The last one applies when no other matches."
+msgstr ""
+
+msgid ""
+"The money saved counts with a dynamic tariff, which follows the exchange "
+"price (shown here without fees and taxes). With a fixed price, you still "
+"save the CO₂."
+msgstr ""
+
+msgid "The password is wrong. Nothing was deleted."
+msgstr ""
+
+#, python-format
+msgid "The password needs at least %(n)d characters."
+msgstr ""
+
+#, python-format
+msgid "The planned window was %(start)s–%(end)s."
+msgstr ""
+
+msgid ""
+"The plug is off because you switched it off. Press the plug button or "
+"“Charge now” to continue."
+msgstr ""
+
+#, python-format
+msgid ""
+"The plug measures %(w)s W. Efficharge checks once more and plans the "
+"charge in a few seconds."
+msgstr ""
+
+msgid ""
+"The plug turns on, the battery charges, and you see what it saved in "
+"money and CO₂."
+msgstr ""
+
+msgid ""
+"The price and the green share of electricity change every 15 minutes. On "
+"a sunny noon or a windy night, power is cheap and mostly renewable. In "
+"the evening peak it is expensive and comes from gas and coal. A battery "
+"rarely has to charge the moment you plug it in: it only has to be full "
+"when you leave."
+msgstr ""
+
+msgid "The two-factor code is wrong or expired."
+msgstr ""
+
+msgid ""
+"The vendor refused the login: too many logins. Please wait a while and "
+"try again."
+msgstr ""
+
+msgid "There already is an account with this email."
+msgstr ""
+
+msgid ""
+"This deletes your account, your plug connections with their access "
+"tokens, all settings and every charge, right away. It can't be undone."
+msgstr ""
+
+msgid ""
+"This is a virtual plug: the plug and the battery are simulated, the "
+"electricity prices and green-power shares are real."
+msgstr ""
+
+msgid ""
+"This plug can't measure power. Plug in your charger, then press “I "
+"plugged in”."
+msgstr ""
+
+msgid "Time"
+msgstr ""
+
+msgid "Time zone"
+msgstr ""
+
+msgid "Today and tomorrow"
+msgstr ""
+
+msgid "Too many attempts. Please wait 15 minutes."
+msgstr ""
+
+msgid "Too many registrations from your address. Please try again later."
+msgstr ""
+
+msgid "Try a virtual plug first"
+msgstr ""
+
+msgid "Try again"
+msgstr ""
+
+msgid "Try it"
+msgstr ""
+
+msgid "Try the live demo"
+msgstr ""
+
+msgid ""
+"Two steps, and your battery charges when electricity is cheap and green: "
+"connect your Meross account, then pick the plug your charger is on."
+msgstr ""
+
+msgid "Two-factor code"
+msgstr ""
+
+msgid "Undo"
+msgstr ""
+
+#, python-format
+msgid "Up to %(d)s left (done around %(t)s)."
+msgstr ""
+
+#, python-format
+msgid ""
+"Use at your own risk: efficharge is a free beta without any guarantee. It"
+" switches your plug through the unofficial library %(library)s, which "
+"neither we nor Meross control. We test it, but it can fail, for example "
+"when Meross changes its cloud."
+msgstr ""
+
+msgid "Use this plug"
+msgstr ""
+
+msgid "Usually both agree: cheap hours are windy and sunny."
+msgstr ""
+
+msgid "Virtual plug"
+msgstr ""
+
+msgid "Volts (V)"
+msgstr ""
+
+#, python-format
+msgid "Waited %(d)s"
+msgstr ""
+
+msgid "Waiting"
+msgstr ""
+
+msgid "Waiting for approval"
+msgstr ""
+
+msgid "Waiting for cheap power"
+msgstr ""
+
+msgid "Waiting for cheap, green power"
+msgstr ""
+
+msgid "Waiting for green power"
+msgstr ""
+
+msgid "Waiting for the best mix of green power and price"
+msgstr ""
+
+#, python-format
+msgid "Waiting for the best window %(start)s–%(end)s."
+msgstr ""
+
+#, python-format
+msgid "Waiting until %(t)s"
+msgstr ""
+
+msgid "Welcome to efficharge!"
+msgstr ""
+
+#, python-format
+msgid "What %(name)s sees"
+msgstr ""
+
+msgid "What counts as saved?"
+msgstr ""
+
+msgid "What counts more:"
+msgstr ""
+
+msgid "What we store and why:"
+msgstr ""
+
+msgid "When do you need the battery?"
+msgstr ""
+
+msgid ""
+"When your real plug is ready: connect your Meross account, then pick the "
+"plug your charger is on."
+msgstr ""
+
+msgid ""
+"Whether e-bike, power station or power tool: any ordinary charger becomes"
+" a smart one. Efficharge controls a smart plug, notices a plug-in and "
+"plans the best charging window before you need the battery."
+msgstr ""
+
+msgid "Which plug charges your battery?"
+msgstr ""
+
+msgid "Who are you?"
+msgstr ""
+
+msgid "Why wait to charge?"
+msgstr ""
+
+msgid "Works with a smart plug. No installation."
+msgstr ""
+
+#, python-format
+msgid "You started charging %(how)s at %(at)s."
+msgstr ""
+
+msgid ""
+"You switched the plug off, so efficharge can't see when a battery is "
+"plugged in. Switch it on again to continue."
+msgstr ""
+
+msgid "You're trying a virtual plug"
+msgstr ""
+
+#, python-format
+msgid "Your %(name)s account is connected. Now add the plug your charger is on."
+msgstr ""
+
+msgid ""
+"Your Meross account itself stays. To also end our access there, change "
+"your Meross password."
+msgstr ""
+
+msgid "Your account and all its data have been deleted."
+msgstr ""
+
+msgid "Your account is connected, but it has no plugs right now."
+msgstr ""
+
+msgid ""
+"Your account uses two-factor authentication. Please enter the code from "
+"your authenticator app."
+msgstr ""
+
+msgid ""
+"Your battery is not at risk: efficharge only switches the charger's "
+"power, the charger itself still controls the charging. At worst, your "
+"battery is not charged in time."
+msgstr ""
+
+msgid "Your charger"
+msgstr ""
+
+msgid "Your name, and how you heard about efficharge"
+msgstr ""
+
+msgid ""
+"Your password is used once to log in and is never stored. Efficharge "
+"keeps only the access token, encrypted."
+msgstr ""
+
+msgid "Your password, to confirm"
+msgstr ""
+
+msgid ""
+"Your phone is offline. Charging goes on anyway: planning and switching "
+"happen on the server, not on your phone."
+msgstr ""
+
+msgid ""
+"Your plug can't measure energy, so efficharge uses the battery size to "
+"estimate it."
+msgstr ""
+
+msgid ""
+"Your plug is connected. Check when you need the battery, then plug in "
+"your charger."
+msgstr ""
+
+msgid ""
+"Your registration hasn't been accepted yet. You can log in as soon as it "
+"is."
+msgstr ""
+
+msgid "best window"
+msgstr ""
+
+msgid "best window if plugged in now"
+msgstr ""
+
+msgid "by"
+msgstr ""
+
+msgid "charging"
+msgstr ""
+
+msgid "default rule"
+msgstr ""
+
+msgid "expected rest"
+msgstr ""
+
+msgid "for all your plugs"
+msgstr ""
+
+msgid "if charged right away"
+msgstr ""
+
+msgid "in the app"
+msgstr ""
+
+msgid "measures power: plugging in is detected automatically"
+msgstr ""
+
+msgid "no data yet"
+msgstr ""
+
+msgid "no registrations waiting"
+msgstr ""
+
+msgid "not reachable right now"
+msgstr ""
+
+msgid "now"
+msgstr ""
+
+msgid "one-off"
+msgstr ""
+
+msgid "online"
+msgstr ""
+
+#, python-format
+msgid "plugged in %(t)s"
+msgstr ""
+
+msgid "ready by"
+msgstr ""
+
+#, python-format
+msgid "ready by %(t)s"
+msgstr ""
+
+#, python-format
+msgid "ready within %(h)s h"
+msgstr ""
+
+#, python-format
+msgid "rule %(n)d"
+msgstr ""
+
+msgid "today"
+msgstr ""
+
+msgid "tomorrow"
+msgstr ""
+
+msgid "until"
+msgstr ""
+
+#, python-format
+msgid "updated %(s)s ago"
+msgstr ""
+
+msgid "with the plug button"
+msgstr ""
+
+msgid "within"
+msgstr ""
+

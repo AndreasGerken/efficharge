@@ -1,0 +1,56 @@
+{% from "_macros.html" import language_links with context %}
+<!doctype html>
+<html lang="{{ get_locale() }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="htmx-config" content='{"includeIndicatorStyles": false}'>
+  <title>{% block title %}efficharge{% endblock %} · efficharge</title>
+  <meta name="theme-color" content="#2a78d6">
+  <meta name="description" content="{{ _("Charge your battery when electricity is cheap and green.") }}">
+  <link rel="manifest" href="/manifest.webmanifest?lang={{ get_locale() }}">
+  <link rel="icon" href="/static/icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/static/icons/icon-180.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" href="{{ static('app.css') }}">
+  <script src="{{ static('app.js') }}" defer></script>
+  <script src="{{ static('vendor/htmx.min.js') }}" defer></script>
+  {% block head %}{% endblock %}
+</head>
+<body hx-headers='{"X-CSRF-Token": "{{ csrf_token }}"}'>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="efficharge"><img class="brand-icon" src="/static/icons/icon.svg" alt="" width="28" height="28"><span class="brand-name">efficharge</span></a>
+    <nav>
+      {% if user %}
+        {# three places; language and log out live in the settings #}
+        {% set path = request.url.path %}
+        {# a plug's own pages (its settings via the gear) belong to the dashboard #}
+        <a href="/devices" {% if path.startswith("/devices") %}aria-current="page"{% endif %}>{{ _("Dashboard") }}</a>
+        <a href="/stats" {% if path == "/stats" %}aria-current="page"{% endif %}>{{ _("Charges") }}</a>
+        <a href="/settings" {% if path.startswith("/settings") %}aria-current="page"{% endif %}>{{ _("Settings") }}</a>
+        {# phones: three places fit, "About" is in the footer #}
+        {% if about_page %}<a class="wide-only" href="/about" {% if path == "/about" %}aria-current="page"{% endif %}>{{ _("About") }}</a>{% endif %}
+        <span class="wide-only">{{ language_links() }}</span>
+      {% else %}
+        {% if about_page %}<a href="/about" {% if request.url.path in ("/", "/about") %}aria-current="page"{% endif %}>{{ _("About") }}</a>{% endif %}
+        {% if demo_enabled %}<a href="/demo">{{ _("Demo") }}</a>{% endif %}
+        <a href="/login">{{ _("Log in") }}</a>
+        {{ language_links() }}
+      {% endif %}
+    </nav>
+  </header>
+  <main>{% block content %}{% endblock %}</main>
+  <footer>
+    <p class="footer-links">
+      {% if about_page %}<a href="/about">{{ _("About efficharge") }}</a>{% endif %}
+      {% if has_imprint %}<a href="/impressum">{{ _("Imprint") }}</a>{% endif %}
+      <a href="/privacy">{{ _("Privacy") }}</a>
+      {% if source_url %}<a href="{{ source_url }}" rel="noopener">{{ _("Source code") }}</a>{% endif %}
+      {% if coffee_url %}<a href="{{ coffee_url }}" rel="noopener">☕ {{ _("Buy me a coffee") }}</a>{% endif %}
+    </p>
+    <p>{{ _("Energy data:") }} {{ attribution }}</p>
+  </footer>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,1356 @@
+# German translations for efficharge.
+# Copyright (C) 2026 ORGANIZATION
+# This file is distributed under the same license as the efficharge project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: efficharge VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2026-11-05 16:38+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#, python-format
+msgid "%(change)s green power"
+msgstr "%(change)s Ökostrom"
+
+#, python-format
+msgid "%(d)s charged"
+msgstr "%(d)s geladen"
+
+#, python-format
+msgid "%(d)s estimated charge time"
+msgstr "%(d)s geschätzte Ladezeit"
+
+#, python-format
+msgid "%(grams)s g CO₂ avoided"
+msgstr "%(grams)s g CO₂ vermieden"
+
+#, python-format
+msgid "%(h)d h"
+msgstr "%(h)d h"
+
+#, python-format
+msgid "%(h)d h %(m)d min"
+msgstr "%(h)d h %(m)d min"
+
+#, python-format
+msgid "%(m)d min"
+msgstr "%(m)d min"
+
+#, python-format
+msgid "%(money)s saved"
+msgstr "%(money)s gespart"
+
+#, python-format
+msgid "%(money)s saved, %(grams)s g CO₂ avoided"
+msgstr "%(money)s gespart, %(grams)s g CO₂ vermieden"
+
+#, python-format
+msgid "%(wh)s Wh"
+msgstr "%(wh)s Wh"
+
+msgid "A full charge takes about (hours)"
+msgstr "Eine volle Ladung dauert etwa (Stunden)"
+
+msgid "About"
+msgstr "Über"
+
+#, python-format
+msgid "About %(d)s left (done around %(t)s)."
+msgstr "Noch etwa %(d)s (fertig gegen %(t)s)."
+
+msgid "About efficharge"
+msgstr "Über efficharge"
+
+msgid "Account"
+msgstr "Konto"
+
+msgid "Add a plug"
+msgstr "Steckdose hinzufügen"
+
+msgid "Add a rule"
+msgstr "Regel hinzufügen"
+
+msgid "Add rule"
+msgstr "Regel hinzufügen"
+
+msgid "All charges"
+msgstr "Alle Ladevorgänge"
+
+msgid "Already added."
+msgstr "Schon hinzugefügt."
+
+msgid "Amp-hours (Ah)"
+msgstr "Amperestunden (Ah)"
+
+msgid "An example charge"
+msgstr "Beispiel"
+
+msgid "Any time"
+msgstr "Jederzeit"
+
+msgid "Average charge time"
+msgstr "Ø Ladedauer"
+
+msgid "Back"
+msgstr "Zurück"
+
+msgid "Back to now"
+msgstr "Zurück zu jetzt"
+
+msgid "Balanced"
+msgstr "Ausgewogen"
+
+msgid "Battery ready"
+msgstr "Akku fertig"
+
+msgid "Battery taken off"
+msgstr "Akku abgenommen"
+
+msgid "Beta. Free to use and open source. No ads, no tracking cookies."
+msgstr "Beta. Kostenlos und Open Source. Keine Werbung, keine Tracking-Cookies."
+
+msgid ""
+"Beta: every registration is checked by hand. Once you're in, connect your"
+" Meross account and pick your plug."
+msgstr ""
+"Beta: Jede Registrierung wird von Hand geprüft. Sobald du freigeschaltet "
+"bist, verbindest du dein Meross-Konto und wählst deine Steckdose."
+
+#. the name of the service, not translated
+msgid "Buy me a coffee"
+msgstr "Buy me a coffee"
+
+msgid "CO₂ avoided"
+msgstr "CO₂ vermieden"
+
+msgid "CO₂ avoided (total)"
+msgstr "CO₂ vermieden (gesamt)"
+
+msgid "Capacity (Wh)"
+msgstr "Kapazität (Wh)"
+
+#, python-format
+msgid "Charge from %(when)s deleted."
+msgstr "Ladung von %(when)s gelöscht."
+
+msgid "Charge now"
+msgstr "Jetzt laden"
+
+msgid "Charge when power is cheap and green"
+msgstr "Laden, wenn Strom günstig und grün ist"
+
+msgid "Charge your battery when electricity is cheap and green."
+msgstr "Lade deinen Akku, wenn Strom günstig und grün ist."
+
+msgid "Charger detected"
+msgstr "Ladegerät erkannt"
+
+msgid "Charger power"
+msgstr "Ladeleistung"
+
+msgid "Charges"
+msgstr "Ladevorgänge"
+
+msgid "Charging"
+msgstr "Lädt"
+
+msgid "Charging again after your pause."
+msgstr "Lädt wieder nach deiner Pause."
+
+#, python-format
+msgid "Charging in the planned window %(start)s–%(end)s."
+msgstr "Lädt im geplanten Zeitfenster %(start)s–%(end)s."
+
+msgid "Charging now: no prices are known yet for the time until your deadline."
+msgstr ""
+"Lädt sofort: Für die Zeit bis zu deinem Fertig-Zeitpunkt sind noch keine "
+"Preise bekannt."
+
+#, python-format
+msgid ""
+"Charging now: right now is the best mix of green power and price before "
+"%(deadline)s."
+msgstr ""
+"Lädt sofort: Jetzt ist die beste Mischung aus Ökostrom und Preis vor "
+"%(deadline)s."
+
+#, python-format
+msgid ""
+"Charging now: right now is the cheapest and greenest time before "
+"%(deadline)s."
+msgstr "Lädt sofort: Jetzt ist die günstigste und grünste Zeit vor %(deadline)s."
+
+#, python-format
+msgid "Charging now: right now is the cheapest time before %(deadline)s."
+msgstr "Lädt sofort: Jetzt ist die günstigste Zeit vor %(deadline)s."
+
+#, python-format
+msgid "Charging now: right now is the greenest time before %(deadline)s."
+msgstr "Lädt sofort: Jetzt ist die grünste Zeit vor %(deadline)s."
+
+#, python-format
+msgid ""
+"Charging now: the battery needs about %(duration)s and should be ready at"
+" %(deadline)s. There isn't enough time for a cheaper window. Adjust the "
+"deadline rules if this happens often."
+msgstr ""
+"Lädt sofort: Der Akku braucht etwa %(duration)s und soll um %(deadline)s "
+"fertig sein. Für ein günstigeres Zeitfenster reicht die Zeit nicht. Passe"
+" die Fertig-bis-Regeln an, wenn das oft passiert."
+
+#, python-format
+msgid ""
+"Charging now: the best window starts at %(start)s, only a few minutes "
+"away, so waiting isn't worth it."
+msgstr ""
+"Lädt sofort: Das beste Zeitfenster beginnt um %(start)s, nur wenige "
+"Minuten entfernt. Warten lohnt sich nicht."
+
+#, python-format
+msgid "Charging would start at %(t)s."
+msgstr "Laden würde um %(t)s starten."
+
+msgid "Charging would start right away."
+msgstr "Laden würde direkt starten."
+
+msgid "Charging."
+msgstr "Lädt."
+
+msgid "Choose your plug"
+msgstr "Steckdose wählen"
+
+msgid "Compared with charging right at plug-in."
+msgstr "Gespart im Vergleich zum Laden direkt beim Einstecken."
+
+msgid "Connect"
+msgstr "Verbinden"
+
+#, python-format
+msgid "Connect %(name)s"
+msgstr "%(name)s verbinden"
+
+
+msgid "Connect a smart plug account"
+msgstr "Konto einer smarten Steckdose verbinden"
+
+msgid "Connect another account"
+msgstr "Weiteres Konto verbinden"
+
+msgid "Connect your plug"
+msgstr "Steckdose verbinden"
+
+msgid "Connect your real plug"
+msgstr "Echte Steckdose verbinden"
+
+msgid "Connected"
+msgstr "Verbunden"
+
+#, python-format
+msgid "Connected as %(email)s"
+msgstr "Verbunden als %(email)s"
+
+msgid "Contact"
+msgstr "Kontakt"
+
+#, python-format
+msgid "Cost %(money)s"
+msgstr "Kosten %(money)s"
+
+#, python-format
+msgid "Cost %(money)s (%(change)s)"
+msgstr "Kosten %(money)s (%(change)s)"
+
+msgid "Cost first"
+msgstr "Kosten zuerst"
+
+msgid "Could not reach your plugs. Please try again in a minute."
+msgstr ""
+"Deine Steckdosen sind gerade nicht erreichbar. Bitte versuch es in einer "
+"Minute nochmal."
+
+msgid "Create account"
+msgstr "Konto anlegen"
+
+msgid "Create an account"
+msgstr "Konto anlegen"
+
+msgid "Create an account to connect your real plug"
+msgstr "Konto anlegen und echte Steckdose verbinden"
+
+#, python-format
+msgid "Currently planned: %(duration)s (from your estimate and %(num)d charge)."
+msgid_plural "Currently planned: %(duration)s (from your estimate and %(num)d charges)."
+msgstr[0] "Aktuell geplant: %(duration)s (aus deiner Schätzung und %(num)d Ladung)."
+msgstr[1] "Aktuell geplant: %(duration)s (aus deiner Schätzung und %(num)d Ladungen)."
+
+#, python-format
+msgid "Currently planned: %(duration)s (your estimate)."
+msgstr "Aktuell geplant: %(duration)s (deine Schätzung)."
+
+msgid "Custom setting"
+msgstr "Eigene Einstellung"
+
+msgid "Dashboard"
+msgstr "Übersicht"
+
+msgid "Day"
+msgstr "Tag"
+
+msgid "Days"
+msgstr "Tage"
+
+msgid "Delete"
+msgstr "Löschen"
+
+msgid "Delete account"
+msgstr "Konto löschen"
+
+msgid "Delete my account"
+msgstr "Mein Konto löschen"
+
+#, python-format
+msgid "Delete the charge from %(when)s (%(wh)s Wh) from the statistics?"
+msgstr "Die Ladung von %(when)s (%(wh)s Wh) aus der Statistik löschen?"
+
+msgid "Demo"
+msgstr "Demo"
+
+msgid "Done any moment now."
+msgstr "Gleich fertig."
+
+msgid ""
+"Each charge is compared with charging right when you plugged in. Money is"
+" the difference in the exchange price, so it is real money with a dynamic"
+" tariff. CO₂ comes from the grid's emissions at the time of charging."
+msgstr ""
+"Jede Ladung wird mit dem Laden direkt beim Einstecken verglichen. Geld "
+"ist der Unterschied im Börsenstrompreis, also echtes Geld mit einem "
+"dynamischen Tarif. CO₂ kommt aus den Emissionen des Stromnetzes zur "
+"Ladezeit."
+
+msgid "Eco and cost agree"
+msgstr "Öko und Kosten sind sich einig"
+
+msgid "Eco and cost disagree today"
+msgstr "Öko und Kosten sind sich heute uneinig"
+
+msgid "Eco first"
+msgstr "Öko zuerst"
+
+msgid "Eco or cost first"
+msgstr "Öko oder Kosten zuerst"
+
+msgid "Edit"
+msgstr "Bearbeiten"
+
+msgid "Efficharge is a hobby project, free to use."
+msgstr "Efficharge ist ein Hobbyprojekt und kostenlos."
+
+msgid ""
+"Efficharge is in a private beta: every registration is checked by hand, "
+"then you can log in."
+msgstr ""
+"Efficharge ist in einer privaten Beta: Jede Registrierung wird von Hand "
+"geprüft, danach kannst du dich anmelden."
+
+msgid ""
+"Efficharge moves the charge into the best hours for you, every time, "
+"without you thinking about it."
+msgstr ""
+"Efficharge legt das Laden in die besten Stunden, jedes Mal, ohne dass du "
+"daran denken musst."
+
+msgid "Efficharge plans the cheapest and greenest time to charge."
+msgstr "Efficharge plant die günstigste und grünste Zeit zum Laden."
+
+msgid ""
+"Efficharge sees the charger start drawing power and switches the plug off"
+" for now."
+msgstr ""
+"Efficharge sieht, dass das Ladegerät Strom zieht, und schaltet die "
+"Steckdose erst einmal aus."
+
+msgid ""
+"Efficharge starts with your estimate. At first it counts like three "
+"charges, so one unusual charge barely changes the plan. Every finished "
+"charge is added, and the planner uses the time 9 of 10 charges were done "
+"in. After about 10 charges the measured times decide."
+msgstr ""
+"Efficharge startet mit deiner Schätzung. Anfangs zählt sie wie drei "
+"Ladungen, so ändert eine ungewöhnliche Ladung den Plan kaum. Jede fertige"
+" Ladung kommt dazu, und geplant wird mit der Zeit, in der 9 von 10 "
+"Ladungen fertig waren. Nach etwa 10 Ladungen entscheiden die gemessenen "
+"Zeiten."
+
+#, python-format
+msgid ""
+"Efficharge stops controlling %(name)s and switches it on, so a waiting "
+"battery still charges. Its charges, rules and readings are deleted. The "
+"plug itself and your other plugs stay as they are."
+msgstr ""
+"Efficharge steuert %(name)s dann nicht mehr und schaltet sie ein, damit "
+"ein wartender Akku trotzdem lädt. Ihre Ladungen, Regeln und Messwerte "
+"werden gelöscht. Die Steckdose selbst und deine anderen Steckdosen "
+"bleiben, wie sie sind."
+
+msgid "Electricity price"
+msgstr "Strompreis"
+
+msgid "Electricity prices, green-power share and CO₂ data:"
+msgstr "Strompreise, Ökostromanteil und CO₂-Daten:"
+
+msgid "Email"
+msgstr "E-Mail"
+
+msgid "Email or password is wrong."
+msgstr "E-Mail oder Passwort ist falsch."
+
+msgid "Email:"
+msgstr "E-Mail:"
+
+msgid "Energy"
+msgstr "Energie"
+
+msgid "Energy data:"
+msgstr "Energiedaten:"
+
+#, python-format
+msgid "Estimated %(change)s cost"
+msgstr "Geschätzt %(change)s Kosten"
+
+#, python-format
+msgid "Estimated %(change)s green power"
+msgstr "Geschätzt %(change)s Ökostrom"
+
+#, python-format
+msgid "Estimated cost %(money)s"
+msgstr "Geschätzte Kosten %(money)s"
+
+#, python-format
+msgid "Estimated cost %(money)s (%(change)s)"
+msgstr "Geschätzte Kosten %(money)s (%(change)s)"
+
+msgid "Fast-forward"
+msgstr "Zeitraffer"
+
+msgid ""
+"For electricity in Germany and Luxembourg. With a dynamic tariff you save"
+" money and CO₂, with a fixed price you still save CO₂."
+msgstr ""
+"Für Strom in Deutschland und Luxemburg. Mit einem dynamischen Tarif "
+"sparst du Geld und CO₂, mit einem Festpreis immer noch CO₂."
+
+msgid ""
+"For now the price alone decides: the green-power forecast doesn't reach "
+"far enough yet."
+msgstr ""
+"Vorerst entscheidet nur der Preis: Die Ökostrom-Prognose reicht noch "
+"nicht weit genug."
+
+msgid ""
+"For now with Meross smart plugs with power metering (e.g. MSS305, "
+"MSS310). More brands to come."
+msgstr ""
+"Vorerst mit smarten Meross-Steckdosen mit Strommessung (z. B. MSS305, "
+"MSS310). Weitere Marken folgen."
+
+msgid "Free and open source"
+msgstr "Kostenlos und Open Source"
+
+msgid ""
+"From the exchange prices and the green-power forecast, before your "
+"deadline, e.g. “ready by 7:00”."
+msgstr ""
+"Aus den Börsenpreisen und der Ökostrom-Prognose, vor deiner Frist, z. B. "
+"„fertig bis 7:00“."
+
+msgid "Green forecast not possible yet"
+msgstr "Öko-Prognose noch nicht möglich"
+
+#, python-format
+msgid "Green power (%%)"
+msgstr "Ökostrom (%%)"
+
+msgid "Green power and price count equally."
+msgstr "Ökostrom und Preis zählen gleich."
+
+msgid "Green power share"
+msgstr "Ökostromanteil"
+
+msgid "How is this calculated?"
+msgstr "Wie wird das berechnet?"
+
+msgid "How it works"
+msgstr "So funktioniert's"
+
+msgid "I plugged in"
+msgstr "Ich habe eingesteckt"
+
+msgid "I use two-factor authentication"
+msgstr "Ich nutze Zwei-Faktor-Anmeldung"
+
+msgid "If no rule matches: ready within"
+msgstr "Wenn keine Regel passt: fertig in"
+
+msgid "If you like the project, feel free to support me."
+msgstr "Wenn dir das Projekt gefällt, supporte mich gerne."
+
+msgid "Imprint"
+msgstr "Impressum"
+
+msgid "Information according to § 5 DDG"
+msgstr "Angaben gemäß § 5 DDG"
+
+msgid "It finds the best window"
+msgstr "Es findet das beste Zeitfenster"
+
+msgid ""
+"It works with any dumb charger that starts charging as soon as it gets "
+"power. It pays off for larger batteries you charge regularly: for the "
+"climate in any case, and with a dynamic electricity tariff financially "
+"for you too."
+msgstr ""
+"Das klappt mit jedem einfachen Ladegerät, das sofort lädt, sobald es "
+"Strom bekommt. Es lohnt sich für größere Akkus, die du regelmäßig lädst: "
+"für das Klima auf jeden Fall, und mit einem dynamischen Stromtarif auch "
+"finanziell für dich."
+
+msgid "Language"
+msgstr "Sprache"
+
+msgid "Last charge"
+msgstr "Letzter Ladevorgang"
+
+msgid "Leave demo"
+msgstr "Demo verlassen"
+
+msgid "Log in"
+msgstr "Anmelden"
+
+#, python-format
+msgid "Log in with your %(name)s app account."
+msgstr "Melde dich mit dem Konto deiner %(name)s-App an."
+
+msgid ""
+"Log in with your smart-plug app account once and pick the plug your "
+"charger is on."
+msgstr ""
+"Melde dich einmal mit dem Konto deiner Steckdosen-App an und wähle die "
+"Steckdose, an der dein Ladegerät hängt."
+
+msgid "Log out"
+msgstr "Abmelden"
+
+msgid "Login failed. Please try again later."
+msgstr "Anmeldung fehlgeschlagen. Bitte versuch es später nochmal."
+
+msgid "Lowest price. Pays off with a dynamic tariff."
+msgstr "Niedrigster Preis. Lohnt sich mit dynamischem Tarif."
+
+msgid ""
+"Many people are trying the demo right now. Please try again in a few "
+"minutes."
+msgstr ""
+"Gerade probieren viele Leute die Demo aus. Bitte versuch es in ein paar "
+"Minuten nochmal."
+
+msgid "Money saved"
+msgstr "Geld gespart"
+
+msgid "Money saved (total)"
+msgstr "Geld gespart (gesamt)"
+
+msgid "More brands will follow. Tapo works via Home Assistant later."
+msgstr "Weitere Marken folgen. Tapo kommt später über Home Assistant."
+
+msgid "Most green power. Price breaks ties."
+msgstr "Am meisten Ökostrom. Bei Gleichstand zählt der Preis."
+
+msgid "Need it now?"
+msgstr "Du brauchst ihn jetzt?"
+
+msgid "Need it now? Press the plug button."
+msgstr "Jetzt gebraucht? Drück die Taste an der Steckdose."
+
+msgid "No account yet?"
+msgstr "Noch kein Konto?"
+
+msgid "No charges yet. They show up here as soon as a battery is plugged in."
+msgstr ""
+"Noch keine Ladevorgänge. Sie erscheinen hier, sobald ein Akku eingesteckt"
+" wird."
+
+msgid "No connection"
+msgstr "Keine Verbindung"
+
+msgid "No plug added yet."
+msgstr "Noch keine Steckdose hinzugefügt."
+
+
+msgid "Normal speed"
+msgstr "Normale Geschwindigkeit"
+
+msgid "Offline"
+msgstr "Offline"
+
+#, python-format
+msgid "Once: ready by %(t)s"
+msgstr "Einmalig: fertig bis %(t)s"
+
+msgid "Or enter what is printed on the battery:"
+msgstr "Oder gib ein, was auf dem Akku steht:"
+
+msgid "Or look around in the demo"
+msgstr "Oder schau dich in der Demo um"
+
+msgid "Otherwise"
+msgstr "Sonst"
+
+msgid "Password"
+msgstr "Passwort"
+
+msgid "Password (at least 10 characters)"
+msgstr "Passwort (mindestens 10 Zeichen)"
+
+msgid "Paused"
+msgstr "Pausiert"
+
+msgid "Paused by you"
+msgstr "Von dir pausiert"
+
+#, python-format
+msgid ""
+"Planned with the forecasts known so far: %(start)s–%(end)s. New forecasts"
+" come during the day, the plan may get better then."
+msgstr ""
+"Geplant mit den bisher bekannten Prognosen: %(start)s–%(end)s. Neue "
+"Prognosen kommen im Lauf des Tages, dann wird der Plan eventuell noch "
+"besser."
+
+msgid "Please enter a valid email address."
+msgstr "Bitte gib eine gültige E-Mail-Adresse ein."
+
+#, python-format
+msgid "Please keep it under %(n)d characters."
+msgstr "Bitte höchstens %(n)d Zeichen."
+
+msgid "Please write a few words about who you are."
+msgstr "Bitte schreib ein paar Worte dazu, wer du bist."
+
+msgid "Plug in a battery"
+msgstr "Akku einstecken"
+
+msgid "Plug in and forget"
+msgstr "Einstecken und vergessen"
+
+msgid "Plug in as usual"
+msgstr "Einstecken wie immer"
+
+#, python-format
+msgid ""
+"Plug offline since %(t)s: efficharge can't read or switch it. Check that "
+"it is online in the plug's app; efficharge reconnects by itself."
+msgstr ""
+"Steckdose offline seit %(t)s: efficharge kann sie nicht lesen oder "
+"schalten. Prüfe in der App der Steckdose, ob sie online ist; efficharge "
+"verbindet sich von selbst wieder."
+
+msgid ""
+"Plug removed, but efficharge couldn't switch it on (offline?). If a "
+"battery is connected, switch the plug on in its app or with its button."
+msgstr ""
+"Steckdose entfernt, aber efficharge konnte sie nicht einschalten "
+"(offline?). Wenn ein Akku dranhängt, schalte sie in ihrer App oder mit "
+"ihrer Taste ein."
+
+msgid "Plug removed. It is switched on and works as a normal plug again."
+msgstr ""
+"Steckdose entfernt. Sie ist eingeschaltet und arbeitet wieder als normale"
+" Steckdose."
+
+msgid "Plug settings"
+msgstr "Steckdosen-Einstellungen"
+
+msgid "Plug switched off"
+msgstr "Steckdose ausgeschaltet"
+
+#, python-format
+msgid ""
+"Plugged in at %(plugged)s, the battery had to be ready by %(ready)s. "
+"Efficharge waited for the sunny midday hours and charged from %(start)s "
+"to %(end)s."
+msgstr ""
+"Um %(plugged)s eingesteckt, bis %(ready)s sollte der Akku voll sein. "
+"Efficharge hat auf die sonnigen Mittagsstunden gewartet und von %(start)s"
+" bis %(end)s geladen."
+
+msgid "Plugged in from"
+msgstr "Eingesteckt von"
+
+msgid "Plugs"
+msgstr "Steckdosen"
+
+#, python-format
+msgid "Power now: %(w)s W"
+msgstr "Aktuelle Leistung: %(w)s W"
+
+msgid "Press the button on the plug. Charging starts right away."
+msgstr "Drück die Taste an der Steckdose. Das Laden startet sofort."
+
+msgid "Press the plug button"
+msgstr "Taste an der Steckdose drücken"
+
+msgid "Price (ct/kWh)"
+msgstr "Preis (ct/kWh)"
+
+msgid "Privacy"
+msgstr "Datenschutz"
+
+msgid "Privacy notice"
+msgstr "Datenschutzerklärung"
+
+msgid "Read the plug now"
+msgstr "Steckdose jetzt abfragen"
+
+msgid "Ready"
+msgstr "Bereit"
+
+msgid "Ready by"
+msgstr "Fertig bis"
+
+msgid "Ready to charge"
+msgstr "Bereit zum Laden"
+
+#, python-format
+msgid ""
+"Real exchange prices and measured green-power shares of %(date)s (Energy-"
+"Charts), simulated battery."
+msgstr ""
+"Echte Börsenpreise und gemessene Ökostrom-Anteile vom %(date)s (Energy-"
+"Charts), simulierter Akku."
+
+msgid "Reconnect"
+msgstr "Neu verbinden"
+
+msgid "Registration is full right now. Please try again in a few days."
+msgstr ""
+"Die Registrierung ist gerade voll. Bitte versuch es in ein paar Tagen "
+"noch einmal."
+
+msgid "Remove"
+msgstr "Entfernen"
+
+msgid "Remove plug"
+msgstr "Steckdose entfernen"
+
+msgid "Remove this plug"
+msgstr "Diese Steckdose entfernen"
+
+msgid "Rule:"
+msgstr "Regel:"
+
+#, python-format
+msgid "Rules %(a)d and %(b)d overlap on %(days)s. Rule %(a)d wins there."
+msgstr ""
+"Die Regeln %(a)d und %(b)d überschneiden sich am %(days)s. Dort gilt "
+"Regel %(a)d."
+
+msgid "Save"
+msgstr "Speichern"
+
+msgid "Saved."
+msgstr "Gespeichert."
+
+msgid "Saved. The plan is updated."
+msgstr "Gespeichert. Der Plan ist aktualisiert."
+
+msgid "Search again"
+msgstr "Nochmal suchen"
+
+msgid "Set"
+msgstr "Setzen"
+
+msgid ""
+"Set up the plug in the Meross app first and check that it is online "
+"there. Then search again."
+msgstr ""
+"Richte die Steckdose zuerst in der Meross-App ein und prüf, dass sie dort"
+" online ist. Such dann nochmal."
+
+msgid "Settings"
+msgstr "Einstellungen"
+
+msgid ""
+"Several demos were started from your address within the last hour. Please"
+" try again later."
+msgstr ""
+"Von deiner Adresse wurden in der letzten Stunde schon mehrere Demos "
+"gestartet. Bitte versuch es später noch einmal."
+
+msgid "Show the data as a table"
+msgstr "Daten als Tabelle anzeigen"
+
+msgid "Simulated plug and battery to try everything out."
+msgstr "Simulierte Steckdose und Akku, um alles auszuprobieren."
+
+msgid "Simulation"
+msgstr "Simulation"
+
+msgid "Source code"
+msgstr "Quellcode"
+
+msgid "Sources"
+msgstr "Quellen"
+
+msgid "Started in the app"
+msgstr "In der App gestartet"
+
+msgid "Started right away: best window"
+msgstr "Direkt gestartet wegen bestem Fenster"
+
+msgid "Started right away: no forecast"
+msgstr "Direkt gestartet wegen fehlender Prognose"
+
+msgid "Started right away: rule"
+msgstr "Direkt gestartet wegen Regel"
+
+msgid "Started with the plug button"
+msgstr "Mit der Taste an der Steckdose gestartet"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Stop charging"
+msgstr "Laden stoppen"
+
+msgid "Switch the plug on"
+msgstr "Steckdose einschalten"
+
+msgid "Take the battery off"
+msgstr "Akku abziehen"
+
+msgid ""
+"Thank you! Your registration is checked by hand. You can log in as soon "
+"as it is accepted."
+msgstr ""
+"Danke! Deine Registrierung wird von Hand geprüft. Du kannst dich "
+"anmelden, sobald sie angenommen ist."
+
+msgid "That's a lot of demos"
+msgstr "Ganz schön viele Demos"
+
+msgid "The battery is ready"
+msgstr "Der Akku ist bereit"
+
+msgid "The connection has expired. Log in again to continue."
+msgstr "Die Verbindung ist abgelaufen. Melde dich neu an, um weiterzumachen."
+
+msgid ""
+"The connection to your plug account has expired. Please reconnect it, "
+"until then efficharge can't switch the plug."
+msgstr ""
+"Die Verbindung zu deinem Steckdosen-Konto ist abgelaufen. Bitte verbinde "
+"es neu, bis dahin kann efficharge die Steckdose nicht schalten."
+
+msgid "The demo is busy"
+msgstr "Die Demo ist ausgelastet"
+
+msgid ""
+"The demo runs a simulated plug and battery on today's real prices. No "
+"account needed."
+msgstr ""
+"Die Demo zeigt eine simulierte Steckdose mit Akku zu den echten Preisen "
+"von heute. Ohne Konto."
+
+msgid "The first matching rule wins. The last one applies when no other matches."
+msgstr "Die erste passende Regel gilt. Die letzte gilt, wenn keine andere passt."
+
+msgid ""
+"The money saved counts with a dynamic tariff, which follows the exchange "
+"price (shown here without fees and taxes). With a fixed price, you still "
+"save the CO₂."
+msgstr ""
+"Das gesparte Geld zählt mit einem dynamischen Tarif, der dem Börsenpreis "
+"folgt (hier ohne Gebühren und Steuern). Mit einem Festpreis sparst du "
+"trotzdem das CO₂."
+
+msgid "The password is wrong. Nothing was deleted."
+msgstr "Das Passwort ist falsch. Es wurde nichts gelöscht."
+
+#, python-format
+msgid "The password needs at least %(n)d characters."
+msgstr "Das Passwort braucht mindestens %(n)d Zeichen."
+
+#, python-format
+msgid "The planned window was %(start)s–%(end)s."
+msgstr "Geplant war das Zeitfenster %(start)s–%(end)s."
+
+msgid ""
+"The plug is off because you switched it off. Press the plug button or "
+"“Charge now” to continue."
+msgstr ""
+"Die Steckdose ist aus, weil du sie ausgeschaltet hast. Drück die Taste an"
+" der Steckdose oder „Jetzt laden“, um weiterzuladen."
+
+#, python-format
+msgid ""
+"The plug measures %(w)s W. Efficharge checks once more and plans the "
+"charge in a few seconds."
+msgstr ""
+"Die Steckdose misst %(w)s W. Efficharge prüft noch einmal und plant die "
+"Ladung in ein paar Sekunden."
+
+msgid ""
+"The plug turns on, the battery charges, and you see what it saved in "
+"money and CO₂."
+msgstr ""
+"Die Steckdose schaltet ein, der Akku lädt, und du siehst, was es an Geld "
+"und CO₂ gespart hat."
+
+msgid ""
+"The price and the green share of electricity change every 15 minutes. On "
+"a sunny noon or a windy night, power is cheap and mostly renewable. In "
+"the evening peak it is expensive and comes from gas and coal. A battery "
+"rarely has to charge the moment you plug it in: it only has to be full "
+"when you leave."
+msgstr ""
+"Preis und Ökostrom-Anteil ändern sich alle 15 Minuten. An einem sonnigen "
+"Mittag oder in einer windigen Nacht ist Strom günstig und meist "
+"erneuerbar. In der Abendspitze ist er teuer und kommt aus Gas und Kohle. "
+"Ein Akku muss selten sofort beim Einstecken laden: Er muss nur voll sein,"
+" wenn du losfährst."
+
+msgid "The two-factor code is wrong or expired."
+msgstr "Der Zwei-Faktor-Code ist falsch oder abgelaufen."
+
+msgid ""
+"The vendor refused the login: too many logins. Please wait a while and "
+"try again."
+msgstr ""
+"Der Hersteller hat die Anmeldung abgelehnt: zu viele Anmeldungen. Bitte "
+"warte etwas und versuch es dann nochmal."
+
+msgid "There already is an account with this email."
+msgstr "Für diese E-Mail gibt es schon ein Konto."
+
+msgid ""
+"This deletes your account, your plug connections with their access "
+"tokens, all settings and every charge, right away. It can't be undone."
+msgstr ""
+"Das löscht sofort dein Konto, deine Steckdosen-Verbindungen samt Zugangs-"
+"Tokens, alle Einstellungen und alle Ladungen. Das lässt sich nicht "
+"rückgängig machen."
+
+msgid ""
+"This is a virtual plug: the plug and the battery are simulated, the "
+"electricity prices and green-power shares are real."
+msgstr ""
+"Das ist eine virtuelle Steckdose: Steckdose und Akku sind simuliert, "
+"Strompreise und Ökostromanteil sind echt."
+
+msgid ""
+"This plug can't measure power. Plug in your charger, then press “I "
+"plugged in”."
+msgstr ""
+"Diese Steckdose misst keinen Strom. Steck dein Ladegerät ein und drück "
+"dann „Ich habe eingesteckt“."
+
+msgid "Time"
+msgstr "Zeit"
+
+msgid "Time zone"
+msgstr "Zeitzone"
+
+msgid "Today and tomorrow"
+msgstr "Heute und morgen"
+
+msgid "Too many attempts. Please wait 15 minutes."
+msgstr "Zu viele Versuche. Bitte warte 15 Minuten."
+
+msgid "Too many registrations from your address. Please try again later."
+msgstr ""
+"Zu viele Registrierungen von deiner Adresse. Bitte versuch es später noch"
+" einmal."
+
+msgid "Try again"
+msgstr "Nochmal versuchen"
+
+msgid "Try it"
+msgstr "Ausprobieren"
+
+msgid "Try the live demo"
+msgstr "Live-Demo ausprobieren"
+
+msgid "Two-factor code"
+msgstr "Zwei-Faktor-Code"
+
+msgid "Undo"
+msgstr "Rückgängig"
+
+#, python-format
+msgid "Up to %(d)s left (done around %(t)s)."
+msgstr "Noch bis zu %(d)s (fertig gegen %(t)s)."
+
+msgid "Use this plug"
+msgstr "Diese Steckdose nutzen"
+
+msgid "Usually both agree: cheap hours are windy and sunny."
+msgstr "Meist passt beides: Günstige Stunden sind windig und sonnig."
+
+msgid "Virtual plug"
+msgstr "Virtuelle Steckdose"
+
+msgid "Volts (V)"
+msgstr "Volt (V)"
+
+#, python-format
+msgid "Waited %(d)s"
+msgstr "%(d)s gewartet"
+
+msgid "Waiting"
+msgstr "Wartet"
+
+msgid "Waiting for cheap power"
+msgstr "Wartet auf günstigen Strom"
+
+msgid "Waiting for cheap, green power"
+msgstr "Wartet auf günstigen, grünen Strom"
+
+msgid "Waiting for green power"
+msgstr "Wartet auf Ökostrom"
+
+msgid "Waiting for the best mix of green power and price"
+msgstr "Wartet auf die beste Mischung aus Ökostrom und Preis"
+
+#, python-format
+msgid "Waiting for the best window %(start)s–%(end)s."
+msgstr "Wartet auf das beste Zeitfenster %(start)s–%(end)s."
+
+#, python-format
+msgid "Waiting until %(t)s"
+msgstr "wartet bis %(t)s"
+
+#, python-format
+msgid "What %(name)s sees"
+msgstr "Was %(name)s sieht"
+
+msgid "What counts as saved?"
+msgstr "Was zählt als gespart?"
+
+msgid "What counts more:"
+msgstr "Was zählt mehr:"
+
+msgid "What we store and why:"
+msgstr "Was wir speichern und warum:"
+
+msgid "When do you need the battery?"
+msgstr "Wann brauchst du den Akku?"
+
+msgid ""
+"Whether e-bike, power station or power tool: any ordinary charger becomes"
+" a smart one. Efficharge controls a smart plug, notices a plug-in and "
+"plans the best charging window before you need the battery."
+msgstr ""
+"Ob E-Bike, Powerstation oder Werkzeug-Akku: Jedes normale Ladegerät wird "
+"smart. Efficharge steuert eine smarte Steckdose, bemerkt das Einstecken "
+"und plant das beste Ladefenster, bevor du den Akku brauchst."
+
+msgid "Which plug charges your battery?"
+msgstr "Welche Steckdose lädt deinen Akku?"
+
+msgid "Who are you?"
+msgstr "Wer bist du?"
+
+msgid "Why wait to charge?"
+msgstr "Warum mit dem Laden warten?"
+
+msgid "Works with a smart plug. No installation."
+msgstr "Funktioniert mit einer smarten Steckdose. Ohne Installation."
+
+#, python-format
+msgid "You started charging %(how)s at %(at)s."
+msgstr "Du hast das Laden um %(at)s %(how)s gestartet."
+
+msgid ""
+"You switched the plug off, so efficharge can't see when a battery is "
+"plugged in. Switch it on again to continue."
+msgstr ""
+"Du hast die Steckdose ausgeschaltet, deshalb sieht efficharge nicht, wann"
+" ein Akku eingesteckt wird. Schalte sie wieder ein, um weiterzumachen."
+
+msgid ""
+"Your Meross account itself stays. To also end our access there, change "
+"your Meross password."
+msgstr ""
+"Dein Meross-Konto selbst bleibt bestehen. Um auch dort unseren Zugriff zu"
+" beenden, ändere dein Meross-Passwort."
+
+msgid "Your account and all its data have been deleted."
+msgstr "Dein Konto und alle seine Daten wurden gelöscht."
+
+msgid "Your account is connected, but it has no plugs right now."
+msgstr "Dein Konto ist verbunden, hat aber gerade keine Steckdosen."
+
+msgid ""
+"Your account uses two-factor authentication. Please enter the code from "
+"your authenticator app."
+msgstr ""
+"Dein Konto nutzt Zwei-Faktor-Anmeldung. Bitte gib den Code aus deiner "
+"Authenticator-App ein."
+
+msgid "Your charger"
+msgstr "Dein Ladegerät"
+
+msgid "Your name, and how you heard about efficharge"
+msgstr "Dein Name, und wie du von efficharge erfahren hast"
+
+msgid ""
+"Your password is used once to log in and is never stored. Efficharge "
+"keeps only the access token, encrypted."
+msgstr ""
+"Dein Passwort wird nur einmal zum Anmelden benutzt und nie gespeichert. "
+"Efficharge behält nur den Zugangs-Token, verschlüsselt."
+
+msgid "Your password, to confirm"
+msgstr "Dein Passwort zur Bestätigung"
+
+msgid ""
+"Your phone is offline. Charging goes on anyway: planning and switching "
+"happen on the server, not on your phone."
+msgstr ""
+"Dein Handy ist offline. Geladen wird trotzdem: Planen und Schalten "
+"passieren auf dem Server, nicht auf deinem Handy."
+
+msgid ""
+"Your plug can't measure energy, so efficharge uses the battery size to "
+"estimate it."
+msgstr ""
+"Deine Steckdose misst keine Energie, deshalb schätzt efficharge sie aus "
+"der Akkugröße."
+
+msgid ""
+"Your plug is connected. Check when you need the battery, then plug in "
+"your charger."
+msgstr ""
+"Deine Steckdose ist verbunden. Prüf, wann du den Akku brauchst, und steck"
+" dann dein Ladegerät ein."
+
+msgid ""
+"Your registration hasn't been accepted yet. You can log in as soon as it "
+"is."
+msgstr ""
+"Deine Registrierung ist noch nicht angenommen. Du kannst dich anmelden, "
+"sobald sie es ist."
+
+msgid "best window"
+msgstr "bestes Zeitfenster"
+
+msgid "best window if plugged in now"
+msgstr "bestes Zeitfenster beim Einstecken jetzt"
+
+msgid "by"
+msgstr "bis"
+
+msgid "charging"
+msgstr "lädt"
+
+msgid "default rule"
+msgstr "Standardregel"
+
+msgid "expected rest"
+msgstr "voraussichtlich noch"
+
+msgid "for all your plugs"
+msgstr "für alle deine Steckdosen"
+
+msgid "if charged right away"
+msgstr "bei sofortigem Laden"
+
+msgid "in the app"
+msgstr "in der App"
+
+msgid "measures power: plugging in is detected automatically"
+msgstr "misst Strom: Einstecken wird automatisch erkannt"
+
+msgid "no data yet"
+msgstr "noch keine Daten"
+
+
+msgid "not reachable right now"
+msgstr "gerade nicht erreichbar"
+
+msgid "now"
+msgstr "jetzt"
+
+msgid "one-off"
+msgstr "einmalig"
+
+msgid "online"
+msgstr "online"
+
+#, python-format
+msgid "plugged in %(t)s"
+msgstr "eingesteckt %(t)s"
+
+msgid "ready by"
+msgstr "fertig bis"
+
+#, python-format
+msgid "ready by %(t)s"
+msgstr "fertig bis %(t)s"
+
+#, python-format
+msgid "ready within %(h)s h"
+msgstr "fertig in %(h)s h"
+
+#, python-format
+msgid "rule %(n)d"
+msgstr "Regel %(n)d"
+
+msgid "today"
+msgstr "heute"
+
+msgid "tomorrow"
+msgstr "morgen"
+
+msgid "until"
+msgstr "bis"
+
+#, python-format
+msgid "updated %(s)s ago"
+msgstr "vor %(s)s aktualisiert"
+
+msgid "with the plug button"
+msgstr "mit der Taste an der Steckdose"
+
+msgid "within"
+msgstr "in"
+
+
+msgid "Admin"
+msgstr "Admin"
+
+msgid "%(num)d registration waiting"
+msgid_plural "%(num)d registrations waiting"
+msgstr[0] "%(num)d Registrierung wartet"
+msgstr[1] "%(num)d Registrierungen warten"
+
+msgid "no registrations waiting"
+msgstr "keine Registrierungen offen"
+
+msgid "Accepted: they can log in now."
+msgstr "Angenommen: Die Person kann sich jetzt anmelden."
+
+msgid "Registration deleted."
+msgstr "Registrierung gelöscht."
+
+msgid "Waiting for approval"
+msgstr "Warten auf Freigabe"
+
+msgid "Accept"
+msgstr "Annehmen"
+
+msgid "Delete the registration of %(email)s?"
+msgstr "Die Registrierung von %(email)s löschen?"
+
+msgid "Reject"
+msgstr "Ablehnen"
+
+msgid "No registrations waiting."
+msgstr "Keine Registrierungen offen."
+
+msgid "Accounts"
+msgstr "Konten"
+
+msgid "%(num)d public demo running"
+msgid_plural "%(num)d public demos running"
+msgstr[0] "%(num)d öffentliche Demo läuft"
+msgstr[1] "%(num)d öffentliche Demos laufen"
+
+msgid "Accepted"
+msgstr "Angenommen"
+
+msgid "Plugs: real plugs only. Charges: finished ones, also on virtual plugs."
+msgstr "Steckdosen: nur echte. Ladevorgänge: abgeschlossene, auch auf virtuellen Steckdosen."
+
+msgid "Welcome to efficharge!"
+msgstr "Willkommen bei efficharge!"
+
+msgid "Two steps, and your battery charges when electricity is cheap and green: connect your Meross account, then pick the plug your charger is on."
+msgstr "Zwei Schritte, und dein Akku lädt, wenn Strom günstig und grün ist: Verbinde dein Meross-Konto und wähle dann die Steckdose, an der dein Ladegerät hängt."
+
+msgid "Try a virtual plug first"
+msgstr "Erst mit einer virtuellen Steckdose testen"
+
+msgid "No plug at hand yet? The virtual plug simulates a plug and a battery on today's real prices, with fast-forward. Remove it whenever you like."
+msgstr "Noch keine Steckdose zur Hand? Die virtuelle Steckdose simuliert Steckdose und Akku mit den echten Preisen von heute, mit Zeitraffer. Du kannst sie jederzeit entfernen."
+
+msgid "Next: pick your plug"
+msgstr "Als Nächstes: deine Steckdose wählen"
+
+msgid "Your %(name)s account is connected. Now add the plug your charger is on."
+msgstr "Dein %(name)s-Konto ist verbunden. Füge jetzt die Steckdose hinzu, an der dein Ladegerät hängt."
+
+msgid "Please log in again"
+msgstr "Bitte melde dich neu an"
+
+msgid "The connection to %(name)s has expired. Until you log in again, efficharge can't switch your plug."
+msgstr "Die Verbindung zu %(name)s ist abgelaufen. Bis du dich neu anmeldest, kann efficharge deine Steckdose nicht schalten."
+
+msgid "You're trying a virtual plug"
+msgstr "Du testest mit einer virtuellen Steckdose"
+
+msgid "When your real plug is ready: connect your Meross account, then pick the plug your charger is on."
+msgstr "Wenn deine echte Steckdose bereit ist: Verbinde dein Meross-Konto und wähle dann die Steckdose, an der dein Ladegerät hängt."
+
+msgid "Open the virtual plug"
+msgstr "Virtuelle Steckdose öffnen"
+
+msgid "All set"
+msgstr "Alles bereit"
+
+msgid "Efficharge switches your plug."
+msgstr "Efficharge schaltet deine Steckdose."
+
+msgid "Efficharge switches your %(num)d plugs."
+msgstr "Efficharge schaltet deine %(num)d Steckdosen."
+
+msgid "Plug in your battery as usual: it charges when electricity is cheap and green."
+msgstr "Steck deinen Akku wie gewohnt an: Er lädt, wenn Strom günstig und grün ist."
+
+msgid "Add a virtual plug"
+msgstr "Virtuelle Steckdose hinzufügen"
+
+msgid "Efficharge works only with Meross plugs that measure power: MSS305, MSS310 or MSS315."
+msgstr "Efficharge funktioniert nur mit Meross-Steckdosen, die Strom messen: MSS305, MSS310 oder MSS315."
+
+msgid "Can't measure power: efficharge doesn't work with this plug."
+msgstr "Misst keinen Strom: Mit dieser Steckdose funktioniert efficharge nicht."
+
+msgid "None of your plugs can measure power."
+msgstr "Keine deiner Steckdosen kann Strom messen."
+
+msgid "%(name)s email"
+msgstr "%(name)s-E-Mail"
+
+msgid "%(name)s password"
+msgstr "%(name)s-Passwort"
+
+msgid "Use at your own risk: efficharge is a free beta without any guarantee. It switches your plug through the unofficial library %(library)s, which neither we nor Meross control. We test it, but it can fail, for example when Meross changes its cloud."
+msgstr "Nutzung auf eigene Gefahr: efficharge ist eine kostenlose Beta ohne jede Gewähr. Es schaltet deine Steckdose über die inoffizielle Bibliothek %(library)s, die weder wir noch Meross in der Hand haben. Wir testen sie, aber sie kann ausfallen, zum Beispiel wenn Meross seine Cloud ändert."
+
+msgid "Your battery is not at risk: efficharge only switches the charger's power, the charger itself still controls the charging. At worst, your battery is not charged in time."
+msgstr "Dein Akku ist dabei nicht in Gefahr: efficharge schaltet nur den Strom für das Ladegerät, das Laden selbst steuert weiter das Ladegerät. Schlimmstenfalls ist dein Akku nicht rechtzeitig geladen."
+
+msgid "If you encounter errors, please email %(email)s."
+msgstr "Wenn dir Fehler auffallen, schreib bitte an %(email)s."

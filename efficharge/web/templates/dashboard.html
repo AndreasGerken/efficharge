@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}{{ device.name }}{% endblock %}
+{% block content %}
+{% if plugs|length > 1 %}
+{# one tab per plug; the heading is the selected tab #}
+<nav class="plug-tabs" aria-label="{{ _('Plugs') }}">
+  {% for plug, virtual in plugs %}
+  <a href="/devices/{{ plug.id }}" {% if plug.id == device.id %}aria-current="page"{% endif %}>{{ plug.name }}</a>
+  {% endfor %}
+</nav>
+<h1 class="visually-hidden">{{ device.name }}</h1>
+{% else %}
+<h1>{{ device.name }}</h1>
+{% endif %}
+{% if demo %}
+{# a virtual plug: say so, and where the real one is connected #}
+<p class="demo-banner">{{ _("This is a virtual plug: the plug and the battery are simulated, the electricity prices and green-power shares are real.") }}
+  {% if is_demo %}
+  <a href="{{ '/register' if registration_open else '/login' }}">{{ _("Create an account to connect your real plug") }} →</a>
+  {% else %}
+  <a href="/settings#plugs">{{ _("Connect your real plug") }} →</a>
+  {% endif %}
+</p>
+{% endif %}
+
+{% include "_status.html" %}
+
+<section class="card charts viz-root" id="charts" data-url="/devices/{{ device.id }}/chart.json" data-empty="{{ _('no data yet') }}"
+         data-refresh="60">
+  <h2>{{ _("Today and tomorrow") }}</h2>
+  {# filled by charts.js: only the bands the chart actually shows #}
+  <p class="muted legend-note" id="legend"></p>
+  <div class="chart-stack">
+    <figure><figcaption></figcaption><div class="chart-box"><canvas data-chart="green"></canvas></div></figure>
+    <figure><figcaption></figcaption><div class="chart-box"><canvas data-chart="price"></canvas></div></figure>
+    <figure><figcaption></figcaption><div class="chart-box small"><canvas data-chart="power"></canvas></div></figure>
+  </div>
+  <details class="table-view">
+    <summary>{{ _("Show the data as a table") }}</summary>
+    <div class="table-wrap"><table><thead><tr>
+      <th>{{ _("Time") }}</th><th>{{ _("Green power (%%)") }}</th><th>{{ _("Price (ct/kWh)") }}</th>
+    </tr></thead><tbody></tbody></table></div>
+  </details>
+</section>
+{% endblock %}
+{% block scripts %}
+<script src="{{ static('vendor/chart.umd.min.js') }}" defer></script>
+<script src="{{ static('charts.js') }}" defer></script>
+{% endblock %}

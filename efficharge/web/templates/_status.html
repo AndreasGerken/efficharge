@@ -1,0 +1,114 @@
+{% from "_macros.html" import time_select, charge_item %}
+<div id="status" hx-get="/devices/{{ device.id }}/status" hx-trigger="every {{ ('1s' if demo.fast else '2s') if demo else ('3s' if status.phase == 'detecting' else '15s') }}, resume"
+     hx-swap="outerHTML" data-chart-refresh="{{ (2 if demo.fast else 10) if demo else 60 }}"
+     {# a refresh doesn't interrupt a click's request; a click cancels a refresh on its way,
+        which would otherwise bring back the card from before the click #}
+     hx-sync="this:drop"
+     data-version="{{ status.phase }}|{{ status.sentence }}|{{ demo.fast if demo }}">
+<section class="card status status-{{ status.phase }}" aria-live="polite" hx-sync="closest #status:replace">
+  {% if needs_reauth %}
+  <p class="error" role="alert">{{ _("The connection to your plug account has expired. Please reconnect it, until then efficharge can't switch the plug.") }}</p>
+  {% endif %}
+  {% if offline_since %}
+  <p class="error" role="alert">{{ _("Plug offline since %(t)s: efficharge can't read or switch it. Check that it is online in the plug's app; efficharge reconnects by itself.", t=fmt_day_time(offline_since, tz, now)) }}</p>
+  {% endif %}
+  <div class="status-top">
+  <ol class="stepper">
+    {% for key, label in steps %}
+    {% set current = loop.index0 == status.step %}
+    <li class="{% if loop.index0 < status.step %}done{% elif current %}current{% if status.step_label %} interrupted{% endif %}{% endif %}">
+      <span class="dot" aria-hidden="true"></span>{% if current and status.step_label %}⏸ {{ status.step_label }}{% else %}{{ label }}{% endif %}
+    </li>
+    {% endfor %}
+  </ol>
+  <a class="gear" href="/devices/{{ device.id }}/settings" title="{{ _('Plug settings') }}" aria-label="{{ _('Plug settings') }}">⚙️</a>
+  </div>
+  <h2 class="headline">{{ status.headline }}</h2>
+  <p class="sentence">{{ status.sentence }}</p>
+  {% if status.show_priority %}
+  {# what counts, right where its effect shows: one setting for all plugs, saved on click #}
+  <form class="priority-switch" method="post" action="/devices/{{ device.id }}/priority">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <span class="muted">{{ _("What counts more:") }}</span>
+    <span class="segments" role="group" aria-label="{{ _('What counts more:') }}">
+      {% for key, icon, label in priorities %}
+      <button class="segment{% if priority == key %} on{% endif %}" title="{{ hints[key] }}" name="priority" value="{{ key }}" aria-pressed="{{ 'true' if priority == key else 'false' }}"
+              hx-post="/devices/{{ device.id }}/priority" hx-vals='{"priority": "{{ key }}"}' hx-target="#status" hx-swap="outerHTML"><span aria-hidden="true">{{ icon }}</span> {{ label }}</button>
+      {% endfor %}
+    </span>
+    {% if priority == "custom" %}<span class="muted small-note">{{ _("Custom setting") }}</span>{% endif %}
+    {% if plug_count > 1 %}<span class="muted small-note">{{ _("for all your plugs") }}</span>{% endif %}
+    {% if status.price_only %}<span class="muted small-note">{{ _("For now the price alone decides: the green-power forecast doesn't reach far enough yet.") }}</span>{% endif %}
+  </form>
+  {% endif %}
+  {# the rule in force, in every state; a click opens it in the settings #}
+  <p class="rule-in-force">{{ _("Rule:") }} {% if rule.href %}<a href="{{ rule.href }}">{{ rule.text }}</a>{% else %}{{ rule.text }}{% endif %}</p>
+  {% if status.chips %}
+  <ul class="chips">{% for chip in status.chips %}<li class="chip chip-{{ chip.kind }}">{{ chip.text }}</li>{% endfor %}</ul>
+  {% endif %}
+  {% if status.hint %}<p class="muted hint">{{ status.hint }}</p>{% endif %}
+
+  <div class="actions">
+    {% if "charge_now" in status.actions %}
+    <button class="button primary" hx-post="/devices/{{ device.id }}/command" hx-vals='{"action": "charge_now"}' hx-target="#status" hx-swap="outerHTML">⚡ {{ _("Charge now") }}</button>
+    {% endif %}
+    {% if "stop" in status.actions %}
+    <button class="button" hx-post="/devices/{{ device.id }}/command" hx-vals='{"action": "stop"}' hx-target="#status" hx-swap="outerHTML">⏸ {{ _("Stop charging") }}</button>
+    {% endif %}
+    {% if "plugged_in" in status.actions %}
+    <button class="button primary" hx-post="/devices/{{ device.id }}/command" hx-vals='{"action": "plugged_in"}' hx-target="#status" hx-swap="outerHTML">🔌 {{ _("I plugged in") }}</button>
+    {% endif %}
+    {% if "plug_on" in status.actions %}
+    <button class="button primary" hx-post="/devices/{{ device.id }}/command" hx-vals='{"action": "plug_on"}' hx-target="#status" hx-swap="outerHTML">{{ _("Switch the plug on") }}</button>
+    {% endif %}
+    {% if "ready_by" in status.actions %}
+    <form class="ready-by" hx-post="/devices/{{ device.id }}/command" hx-target="#status" hx-swap="outerHTML">
+      <input type="hidden" name="action" value="ready_by">
+      <span>{{ _("Ready by") }}</span>
+      <select name="ready_day" aria-label="{{ _('Day') }}">
+        {% for value, label in ready_days %}<option value="{{ value }}" {% if value == ready_default[0] %}selected{% endif %}>{{ label }}</option>{% endfor %}
+      </select>
+      {{ time_select("ready_time", ready_default[1], "") }}
+      <button class="button small">{{ _("Set") }}</button>
+    </form>
+    {% endif %}
+  </div>
+
+  <p class="meta muted">
+    {% if row and row.last_power_w is not none %}{{ _("Power now: %(w)s W", w=fmt_num(row.last_power_w, "0.0")) }} · {% endif %}
+    {% if last_seen_ago is not none %}{{ _("updated %(s)s ago", s=fmt_duration(last_seen_ago)) }}{% endif %}
+    <button class="icon-button refresh" title="{{ _('Read the plug now') }}" aria-label="{{ _('Read the plug now') }}"
+            hx-post="/devices/{{ device.id }}/command" hx-vals='{"action": "refresh"}' hx-target="#status" hx-swap="outerHTML">↻</button>
+  </p>
+
+  {% if demo %}
+  {# a virtual plug: what you'd do with a real one (battery, button), and time travel #}
+  <div class="actions sim-actions" role="group" aria-label="{{ _('Simulation') }}">
+    <span class="muted">{{ _("Simulation") }}</span>
+    {% if demo.battery %}
+    <button class="button small" hx-post="/devices/{{ device.id }}/demo" hx-vals='{"action": "unplug"}' hx-target="#status" hx-swap="outerHTML">↩ {{ _("Take the battery off") }}</button>
+    <button class="button small" hx-post="/devices/{{ device.id }}/demo" hx-vals='{"action": "button"}' hx-target="#status" hx-swap="outerHTML">🔘 {{ _("Press the plug button") }}</button>
+    {% else %}
+    <button class="button small" hx-post="/devices/{{ device.id }}/demo" hx-vals='{"action": "plug_in"}' hx-target="#status" hx-swap="outerHTML">🔌 {{ _("Plug in a battery") }}</button>
+    {% endif %}
+    {% if demo.fast %}
+    <button class="button small" hx-post="/devices/{{ device.id }}/demo" hx-vals='{"action": "normal"}' hx-target="#status" hx-swap="outerHTML">▶ {{ _("Normal speed") }}</button>
+    {% else %}
+    <button class="button small" hx-post="/devices/{{ device.id }}/demo" hx-vals='{"action": "fast"}' hx-target="#status" hx-swap="outerHTML">⏩ {{ _("Fast-forward") }}</button>
+    {% endif %}
+    {% if demo.moved %}
+    <button class="button small" hx-post="/devices/{{ device.id }}/demo" hx-vals='{"action": "reset"}' hx-target="#status" hx-swap="outerHTML">↺ {{ _("Back to now") }}</button>
+    {% endif %}
+  </div>
+  {% endif %}
+
+  {% if status.recent %}
+  <div class="recent">
+    <h3>{{ _("Last charge") }}</h3>
+    <ol class="charges">{{ charge_item(status.recent, recent_chips, tz, now, deletable=False) }}</ol>
+    <a href="/stats">{{ _("All charges") }} →</a>
+  </div>
+  {% endif %}
+</section>
+
+</div>

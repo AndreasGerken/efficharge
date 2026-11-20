@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}{{ _("Offline") }}{% endblock %}
+{% block content %}
+<section class="narrow card">
+  <h1>{{ _("No connection") }}</h1>
+  <p>{{ _("Your phone is offline. Charging goes on anyway: planning and switching happen on the server, not on your phone.") }}</p>
+  <a class="button primary" href="/">{{ _("Try again") }}</a>
+</section>
+{% endblock %}

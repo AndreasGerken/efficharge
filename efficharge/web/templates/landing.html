@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% from "_macros.html" import risk_note with context %}
+{% block title %}{{ _("Charge when power is cheap and green") }}{% endblock %}
+{% block content %}
+<section class="hero">
+  <h1>{{ _("Charge your battery when electricity is cheap and green.") }}</h1>
+  <p class="lead">{{ _("Whether e-bike, power station or power tool: any ordinary charger becomes a smart one. Efficharge controls a smart plug, notices a plug-in and plans the best charging window before you need the battery.") }}</p>
+  <ul class="hero-notes">
+    <li><span aria-hidden="true">🔌</span> {{ _("For now with Meross smart plugs with power metering (e.g. MSS305, MSS310). More brands to come.") }}</li>
+    <li><span aria-hidden="true">⚡</span> {{ _("For electricity in Germany and Luxembourg. With a dynamic tariff you save money and CO₂, with a fixed price you still save CO₂.") }}</li>
+    <li><span aria-hidden="true">🧪</span> {{ _("Beta. Free to use and open source. No ads, no tracking cookies.") }}</li>
+  </ul>
+</section>
+<section class="three">
+  <div class="card"><h3>🔌 {{ _("Plug in and forget") }}</h3><p>{{ _("Works with a smart plug. No installation.") }}</p></div>
+  <div class="card"><h3>🌱 {{ _("Eco or cost first") }}</h3><p>{{ _("Usually both agree: cheap hours are windy and sunny.") }}</p></div>
+  <div class="card"><h3>🔘 {{ _("Need it now?") }}</h3><p>{{ _("Press the button on the plug. Charging starts right away.") }}</p></div>
+</section>
+
+<section class="intro">
+  <h2>{{ _("Why wait to charge?") }}</h2>
+  <p>{{ _("The price and the green share of electricity change every 15 minutes. On a sunny noon or a windy night, power is cheap and mostly renewable. In the evening peak it is expensive and comes from gas and coal. A battery rarely has to charge the moment you plug it in: it only has to be full when you leave.") }}</p>
+  <p>{{ _("Efficharge moves the charge into the best hours for you, every time, without you thinking about it.") }}</p>
+  <p>{{ _("It works with any dumb charger that starts charging as soon as it gets power. It pays off for larger batteries you charge regularly: for the climate in any case, and with a dynamic electricity tariff financially for you too.") }}</p>
+</section>
+
+<section class="intro">
+  <h2>{{ _("How it works") }}</h2>
+  <ol class="steps">
+    <li><strong>{{ _("Connect your plug") }}</strong><p>{{ _("Log in with your smart-plug app account once and pick the plug your charger is on.") }}</p></li>
+    <li><strong>{{ _("Plug in as usual") }}</strong><p>{{ _("Efficharge sees the charger start drawing power and switches the plug off for now.") }}</p></li>
+    <li><strong>{{ _("It finds the best window") }}</strong><p>{{ _("From the exchange prices and the green-power forecast, before your deadline, e.g. “ready by 7:00”.") }}</p></li>
+    <li><strong>{{ _("The battery is ready") }}</strong><p>{{ _("The plug turns on, the battery charges, and you see what it saved in money and CO₂.") }}</p></li>
+  </ol>
+</section>
+
+<section class="intro">
+  <h2>{{ _("An example charge") }}</h2>
+  <p>{{ _("Plugged in at %(plugged)s, the battery had to be ready by %(ready)s. Efficharge waited for the sunny midday hours and charged from %(start)s to %(end)s.", plugged=example_times.plugged, ready=example_times.ready, start=example_times.start, end=example_times.end) }}</p>
+  <ul class="chips">{% for chip in example_chips %}<li class="chip chip-{{ chip.kind }}">{{ chip.text }}</li>{% endfor %}</ul>
+  <div class="card charts viz-root example-chart" id="charts" data-url="/example-chart.json" data-empty="{{ _('no data yet') }}">
+    <p class="muted legend-note" id="legend"></p>
+    <div class="chart-stack">
+      <figure><figcaption></figcaption><div class="chart-box"><canvas data-chart="green"></canvas></div></figure>
+      <figure><figcaption></figcaption><div class="chart-box"><canvas data-chart="price"></canvas></div></figure>
+      <figure><figcaption></figcaption><div class="chart-box small"><canvas data-chart="power"></canvas></div></figure>
+    </div>
+  </div>
+  <p class="muted small-note">{{ _("The money saved counts with a dynamic tariff, which follows the exchange price (shown here without fees and taxes). With a fixed price, you still save the CO₂.") }}</p>
+  <p class="muted small-note">{{ _("Real exchange prices and measured green-power shares of %(date)s (Energy-Charts), simulated battery.", date=example_times.date) }}</p>
+</section>
+
+{% if demo_enabled or registration_open %}
+<section class="intro">
+  <h2>{{ _("Try it") }}</h2>
+  {% if demo_enabled %}<p>{{ _("The demo runs a simulated plug and battery on today's real prices. No account needed.") }}</p>{% endif %}
+  <p class="cta">
+    {% if demo_enabled %}<a class="button primary" href="/demo">{{ _("Try the live demo") }}</a>{% endif %}
+    {% if registration_open %}<a class="button" href="/register">{{ _("Create an account") }}</a>{% endif %}
+  </p>
+  {% if registration_open %}<p class="muted small-note">{{ _("Beta: every registration is checked by hand. Once you're in, connect your Meross account and pick your plug.") }}</p>{% endif %}
+  {{ risk_note() }}
+</section>
+{% endif %}
+
+<section class="card support">
+  <div>
+    <h3>{{ _("Free and open source") }}</h3>
+    <p class="muted">{{ _("Efficharge is a hobby project, free to use.") }}{% if coffee_url %} {{ _("If you like the project, feel free to support me.") }}{% endif %}</p>
+  </div>
+  <p class="cta">
+    {% if coffee_url %}<a class="button" href="{{ coffee_url }}" rel="noopener">☕ {{ _("Buy me a coffee") }}</a>{% endif %}
+    {% if source_url %}<a class="button" href="{{ source_url }}" rel="noopener">{{ _("Source code") }}</a>{% endif %}
+  </p>
+</section>
+{% endblock %}
+{% block scripts %}
+<script src="{{ static('vendor/chart.umd.min.js') }}" defer></script>
+<script src="{{ static('charts.js') }}" defer></script>
+{% endblock %}

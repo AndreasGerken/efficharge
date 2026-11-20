@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% from "_macros.html" import back_link, rule_fields, time_select with context %}
+{% block title %}{{ _("Plug settings") }} · {{ device.name }}{% endblock %}
+{% block content %}
+{{ back_link("/devices/%d" % device.id, history=not welcome) }}
+<h1>⚙️ {{ device.name }}</h1>
+{% if welcome %}<p class="notice" role="status">{{ _("Your plug is connected. Check when you need the battery, then plug in your charger.") }}</p>{% endif %}
+
+<form method="post" action="/devices/{{ device.id }}/settings" class="card stack"
+      hx-post="/devices/{{ device.id }}/settings" hx-trigger="change" hx-target="#planned" hx-swap="outerHTML">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+  <fieldset>
+    <legend><h2>{{ _("Your charger") }}</h2></legend>
+    <label>{{ _("A full charge takes about (hours)") }}
+      <input type="number" name="default_hours" min="0.25" max="24" step="0.25" value="{{ s.default_duration_min / 60 }}"></label>
+    {% include "_planned.html" %}
+    <details class="more">
+      <summary>{{ _("How is this calculated?") }}</summary>
+      <p>{{ _("Efficharge starts with your estimate. At first it counts like three charges, so one unusual charge barely changes the plan. Every finished charge is added, and the planner uses the time 9 of 10 charges were done in. After about 10 charges the measured times decide.") }}</p>
+    </details>
+    {% if not s.metered %}
+    {# only plugs without metering: the energy of a charge comes from the battery size #}
+    <p class="muted small-note">{{ _("Your plug can't measure energy, so efficharge uses the battery size to estimate it.") }}</p>
+    <label>{{ _("Capacity (Wh)") }}
+      <input type="text" inputmode="decimal" name="battery_wh" placeholder="504" value="{{ fmt_num(s.battery_kwh * 1000, '0') if s.battery_kwh is not none else '' }}"></label>
+    <p class="muted small-note">{{ _("Or enter what is printed on the battery:") }}</p>
+    <div class="row">
+      <label>{{ _("Volts (V)") }} <input type="text" inputmode="decimal" name="battery_v" placeholder="36" size="5"></label>
+      ×
+      <label>{{ _("Amp-hours (Ah)") }} <input type="text" inputmode="decimal" name="battery_ah" placeholder="14" size="5"></label>
+    </div>
+    {% endif %}
+  </fieldset>
+  <noscript><button class="button primary">{{ _("Save") }}</button></noscript>
+</form>
+
+<section class="card" id="rules">
+  <h2>{{ _("When do you need the battery?") }}</h2>
+  <p class="muted">{{ _("The first matching rule wins. The last one applies when no other matches.") }}</p>
+  {% include "_rules.html" %}
+  <details class="more">
+    <summary>{{ _("Add a rule") }}</summary>
+    <form class="rule-form" hx-post="/devices/{{ device.id }}/rules" hx-target="#rules-list" hx-swap="outerHTML">
+      {{ rule_fields() }}
+      <button class="button">{{ _("Add rule") }}</button>
+    </form>
+  </details>
+</section>
+{% if removable %}
+<section class="card">
+  <details class="danger-zone" id="remove">
+    <summary>{{ _("Remove this plug") }}</summary>
+    <form method="post" action="/devices/{{ device.id }}/remove" class="stack">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+      <p>{{ _("Efficharge stops controlling %(name)s and switches it on, so a waiting battery still charges. Its charges, rules and readings are deleted. The plug itself and your other plugs stay as they are.", name=device.name) }}</p>
+      <button class="button danger">{{ _("Remove plug") }}</button>
+    </form>
+  </details>
+</section>
+{% endif %}
+{% endblock %}

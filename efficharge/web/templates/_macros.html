@@ -1,0 +1,96 @@
+{# 24-hour time selection in 15-minute steps: <input type=time> shows AM/PM in English
+   browsers and a page can't change that. #}
+{% macro time_select(name, value, label) -%}
+<label>{{ label }}
+  <select name="{{ name }}">
+    {% for h in range(24) %}{% for m in (0, 15, 30, 45) %}{% set t = "%02d:%02d"|format(h, m) %}
+    <option value="{{ t }}" {% if t == value %}selected{% endif %}>{{ t }}</option>
+    {% endfor %}{% endfor %}
+  </select>
+</label>
+{%- endmacro %}
+
+{% macro weekday_boxes(mask) -%}
+<fieldset class="weekdays">
+  <legend>{{ _("Days") }}</legend>
+  {% for name in weekday_names() %}
+  <label><input type="checkbox" name="wd" value="{{ loop.index0 }}" {% if mask // (2 ** loop.index0) % 2 %}checked{% endif %}> {{ name }}</label>
+  {% endfor %}
+</fieldset>
+{%- endmacro %}
+
+{% macro within_select(minutes, label) -%}
+<label>{{ label }}
+  <select name="within_h">
+    {% for h in within_hours() %}<option value="{{ h }}" {% if h * 60 == minutes %}selected{% endif %}>{{ h }} h</option>{% endfor %}
+  </select>
+</label>
+{%- endmacro %}
+
+{# A rule: when plugged in → ready by a time of day, or ready within N hours. #}
+{% macro rule_fields(mask=31, plugged_from="06:00", plugged_until="15:00", ready_by="17:00", within_min=None) -%}
+{{ weekday_boxes(mask) }}
+{{ time_select("plugged_from", plugged_from, _("Plugged in from")) }}
+{{ time_select("plugged_until", plugged_until, _("until")) }}
+<fieldset class="rule-target">
+  <legend>{{ _("Battery ready") }}</legend>
+  <div class="target-choice"><input type="radio" name="target" value="ready_by" aria-label="{{ _('by') }}" {% if not within_min %}checked{% endif %}>
+    {{ time_select("ready_by", ready_by or "17:00", _("by")) }}</div>
+  <div class="target-choice"><input type="radio" name="target" value="within" aria-label="{{ _('within') }}" {% if within_min %}checked{% endif %}>
+    {{ within_select(within_min or 360, _("within")) }}</div>
+</fieldset>
+{%- endmacro %}
+
+{# One charge: when, and labels for why/energy/cost/savings. Same on the status card
+   and the savings page. #}
+{% macro charge_item(c, labels, tz, now, deletable=True) -%}
+<li class="charge">
+  <div class="charge-head">
+    <span>🔌 {{ fmt_day_time(c.plugged_at, tz, now) }}
+      {% if c.actual_start %}· ⚡ {{ fmt_day_time(c.actual_start, tz, now) }}{% if c.end_at %}–{{ fmt_day_time(c.end_at, tz, now) }}{% endif %}{% endif %}</span>
+    {% if deletable and c.end_at %}
+    <button class="icon-button" title="{{ _('Delete') }}" aria-label="{{ _('Delete') }}"
+            hx-post="/cycles/{{ c.id }}/delete"
+            hx-confirm="{{ _('Delete the charge from %(when)s (%(wh)s Wh) from the statistics?', when=fmt_day_time(c.plugged_at, tz, now), wh=fmt_num((c.kwh or 0) * 1000, '#,##0')) }}">🗑️</button>
+    {% endif %}
+  </div>
+  <ul class="chips">{% for chip in labels %}<li class="chip chip-{{ chip.kind }}">{{ chip.text }}</li>{% endfor %}</ul>
+</li>
+{%- endmacro %}
+
+{# DE · EN: switches the language of this session (logged out, demo) #}
+{% macro language_links() -%}
+<span class="lang">
+  <a href="?lang=de" {% if get_locale() == "de" %}aria-current="true"{% endif %}>DE</a> |
+  <a href="?lang=en" {% if get_locale() == "en" %}aria-current="true"{% endif %}>EN</a>
+</span>
+{%- endmacro %}
+
+{% macro logout_button(is_demo) -%}
+<form method="post" action="/logout" class="inline">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+  <button class="button">{% if is_demo %}{{ _("Leave demo") }}{% else %}{{ _("Log out") }}{% endif %}</button>
+</form>
+{%- endmacro %}
+
+{# the plugs efficharge works with: welcome, "trying a virtual plug", the Meross login #}
+{% macro meross_models() -%}
+<p class="small-note">🔌 {{ _("Efficharge works only with Meross plugs that measure power: MSS305, MSS310 or MSS315.") }}</p>
+{%- endmacro %}
+
+{# use at your own risk: on sign-up, on the vendor login and on the start page #}
+{% macro risk_note() -%}
+{% set library %}<a href="https://github.com/albertogeniola/MerossIot" rel="noopener">meross_iot</a>{% endset %}
+<div class="small-note risk-note">
+  <p>⚠️ {{ _("Use at your own risk: efficharge is a free beta without any guarantee. It switches your plug through the unofficial library %(library)s, which neither we nor Meross control. We test it, but it can fail, for example when Meross changes its cloud.", library=library) }}</p>
+  <p>{{ _("Your battery is not at risk: efficharge only switches the charger's power, the charger itself still controls the charging. At worst, your battery is not charged in time.") }}</p>
+  {% if support_email %}{% set mail %}<a href="mailto:{{ support_email }}">{{ support_email }}</a>{% endset %}
+  <p>{{ _("If you encounter errors, please email %(email)s.", email=mail) }}</p>{% endif %}
+</div>
+{%- endmacro %}
+
+{# "← Back", at the top of every page outside the top bar. ``history``: the page has several
+   ways in, so go back where the user came from (app.js), ``href`` if they came from elsewhere #}
+{% macro back_link(href, history=false) -%}
+<a class="back-link" href="{{ href }}"{% if history %} data-back{% endif %}>← {{ _("Back") }}</a>
+{%- endmacro %}

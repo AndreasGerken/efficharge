@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% from "_macros.html" import back_link with context %}
+{# Legal text: written per language (privacy_en.html), not through the gettext catalog. #}
+{% block title %}Datenschutz{% endblock %}
+{% block content %}
+{{ back_link("/", history=true) }}
+<section class="card legal">
+  <h1>Datenschutzerklärung</h1>
+  <p class="muted">Stand: November 2026</p>
+
+  <p>Kurz gesagt: Efficharge speichert nur, was es zum Steuern deiner Steckdose braucht. Keine
+  Werbung, kein Tracking, keine Analyse-Dienste, keine eingebundenen Inhalte von anderen
+  Servern. Dein Meross-Passwort wird nie gespeichert.</p>
+
+  <h2>1. Verantwortlich</h2>
+  {% if imprint.has_imprint %}
+  <p>{{ imprint.imprint_name }}<br>{{ imprint.imprint_address }}<br>
+  E-Mail: <a href="mailto:{{ imprint.imprint_email }}">{{ imprint.imprint_email }}</a></p>
+  {% else %}
+  <p>Verantwortlich ist der Betreiber dieser Efficharge-Installation.</p>
+  {% endif %}
+
+  <h2>2. Welche Daten wir verarbeiten</h2>
+  <h3>Beim Besuch der Website</h3>
+  <p>Dein Browser übermittelt technisch bedingt deine IP-Adresse und die aufgerufene Adresse.
+  Wir schreiben <strong>kein Zugriffsprotokoll</strong>: Weder der Webserver noch die Anwendung
+  speichern IP-Adressen. Nur zum Schutz vor dem Erraten von Passwörtern merkt sich die Anwendung
+  fehlgeschlagene Anmeldungen je IP-Adresse für 15 Minuten im Arbeitsspeicher (nicht auf der
+  Festplatte). Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (Sicherheit des Dienstes).</p>
+
+  <h3>Cookie</h3>
+  <p>Wir setzen genau ein Cookie (<code>ec_session</code>), schon beim ersten Besuch und auch ohne
+  Anmeldung. Es hält dich angemeldet, merkt sich
+  deine Sprache und schützt Formulare vor Fremdzugriffen (CSRF). Es ist signiert, läuft nach
+  30 Tagen ab und ist für den Dienst unbedingt erforderlich (§ 25 Abs. 2 Nr. 2 TDDDG), daher
+  fragen wir nicht nach einer Einwilligung. Es gibt keine Tracking- oder Werbe-Cookies.</p>
+
+  <h3>Dein Konto</h3>
+  <ul>
+    <li>E-Mail-Adresse und ein Hash deines Passworts (Argon2id; das Passwort selbst kennen wir nicht),</li>
+    <li>dein Text bei der Registrierung („Wer bist du?“), damit wir Anmeldungen von Hand freigeben können,</li>
+    <li>Einstellungen: Sprache, Zeitzone, Öko-/Preis-Priorität, Ladezeiten und Regeln wie „fertig bis 7:00“.</li>
+  </ul>
+
+  <h3>Deine Steckdose und deine Ladungen</h3>
+  <ul>
+    <li>das Zugangs-Token deines Meross-Kontos, verschlüsselt (AES-GCM), dazu die E-Mail deines Meross-Kontos, die Meross mit dem Token liefert,</li>
+    <li>Name und Kennung deiner Steckdosen,</li>
+    <li>die Leistungsmessung der Steckdose (etwa alle 30 Sekunden) und ihr Schaltzustand,</li>
+    <li>deine Ladungen: Einsteckzeit, geplantes und tatsächliches Laden, Energie, berechnete Ersparnis, Tastendrücke an der Steckdose.</li>
+  </ul>
+  <p>Aus diesen Daten lässt sich ablesen, wann du dein Gerät einsteckst und lädst. Wir nutzen sie
+  ausschließlich, um für dich das Laden zu planen, die Ladedauer zu lernen und dir die Ersparnis zu
+  zeigen. Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (Erbringung des Dienstes, den du nutzt).</p>
+
+  <h3>Demo</h3>
+  <p>Die Demo nutzt eine simulierte Steckdose. Sie legt ein anonymes Demo-Konto ohne E-Mail an, das
+  zwei Stunden nach der letzten Nutzung samt aller Daten gelöscht wird.</p>
+
+  <h2 id="meross">3. Meross</h2>
+  <p>Efficharge steuert Meross-Steckdosen über die Cloud von Meross (Chengdu Meross Technology Co.,
+  Ltd., China). Efficharge ist kein Angebot von Meross und steht in keiner Verbindung zu Meross; es
+  nutzt die inoffizielle Open-Source-Bibliothek <code>meross_iot</code>.</p>
+  <ul>
+    <li><strong>Anmeldung:</strong> Wenn du dein Meross-Konto verbindest, schickt unser Server deine
+    Meross-E-Mail, dein Passwort und ggf. den Zwei-Faktor-Code einmalig an Meross, um ein
+    Zugangs-Token zu erhalten. Das Passwort wird danach verworfen und nie gespeichert oder protokolliert.</li>
+    <li><strong>Betrieb:</strong> Mit dem Token hält unser Server eine Verbindung zur Meross-Cloud.
+    Darüber liest er die Leistung deiner Steckdose, schaltet sie ein und aus und erfährt, wenn du die
+    Taste drückst. Meross sieht dabei, dass auf dein Konto von unserem Server aus zugegriffen wird,
+    sowie die Schaltbefehle und Abfragen. Andere Daten über dich geben wir nicht an Meross weiter.</li>
+    <li><strong>Wo:</strong> Efficharge nutzt den europäischen Server von Meross
+    (<code>iotx-eu.meross.com</code>). Für die Verarbeitung durch Meross, auch eine mögliche
+    Übermittlung in Drittländer wie China, ist Meross selbst verantwortlich; es gilt die
+    <a href="https://www.meross.com/en-gc/privacy-policy" rel="noopener">Datenschutzerklärung von Meross</a>,
+    der du bei der Einrichtung deines Meross-Kontos zugestimmt hast.</li>
+    <li><strong>Trennen:</strong> Unter <em>Einstellungen → Steckdosen</em> entfernst du das
+    Meross-Konto; das Token und alle Daten dieser Steckdosen werden dann gelöscht. Wenn du zusätzlich
+    dein Meross-Passwort änderst, wird das Token auch bei Meross ungültig.</li>
+  </ul>
+  <p>Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO; die Verbindung zu Meross ist nötig, damit
+  Efficharge deine Steckdose schalten kann.</p>
+
+  <h2>4. Weitere Empfänger</h2>
+  <ul>
+    {% if imprint.hosting_provider %}
+    <li><strong>Hosting:</strong> Den Server betreibt {{ imprint.hosting_provider }} in unserem
+    Auftrag (Auftragsverarbeitung, Art. 28 DSGVO).</li>
+    {% endif %}
+    <li><strong>Energiedaten:</strong> Preise und Ökostrom-Prognosen lädt unser Server von
+    <a href="https://www.energy-charts.info" rel="noopener">Energy-Charts</a> (Fraunhofer ISE).
+    Dabei werden keine Daten über dich übertragen.</li>
+    <li><strong>Externe Links</strong> (z. B. {% if coffee_url %}„Buy me a coffee“, {% endif %}GitHub, Meross) öffnen fremde
+    Websites. Erst wenn du sie anklickst, gelten dort deren Datenschutzbestimmungen.</li>
+  </ul>
+  <p>Wir verkaufen keine Daten und geben sie sonst an niemanden weiter, außer wir sind gesetzlich dazu verpflichtet.</p>
+
+  <h2>5. Wie lange wir Daten speichern</h2>
+  <ul>
+    <li>Konto, Einstellungen und Ladungen: bis du dein Konto löschst (<em>Einstellungen → Konto → Konto löschen</em>). Dann ist alles sofort aus der Datenbank entfernt. Eine nicht freigegebene Registrierung löschen wir.</li>
+    <li>Leistungsmessungen außerhalb von Ladungen: 90 Tage.</li>
+    <li>Meross-Token und Steckdosen-Daten: bis du das Meross-Konto in den Einstellungen entfernst. Eine einzelne Steckdose entfernst du in ihren Einstellungen, ihre Ladungen und Messwerte werden dann gelöscht.</li>
+    <li>Sicherungskopien der Datenbank, damit bei einem Ausfall nichts verloren geht: höchstens
+    {{ imprint.backup_days }} Tage, auch die Kopien außerhalb des Servers. Gelöschte Konten verschwinden aus diesen Kopien, sobald sie ablaufen; aus einer Kopie wiederhergestellt
+    würden wir sie erneut löschen.</li>
+  </ul>
+
+  <h2>6. Deine Rechte</h2>
+  <p>Du hast das Recht auf Auskunft (Art. 15 DSGVO), Berichtigung (Art. 16), Löschung (Art. 17),
+  Einschränkung der Verarbeitung (Art. 18), Datenübertragbarkeit (Art. 20) und Widerspruch gegen
+  Verarbeitungen auf Grundlage von Art. 6 Abs. 1 lit. f (Art. 21). Dein Konto mit allen Daten löschst du jederzeit selbst unter <em>Einstellungen → Konto</em>.
+  Für alles andere schreib einfach eine E-Mail
+  {% if imprint.has_imprint %}an <a href="mailto:{{ imprint.imprint_email }}">{{ imprint.imprint_email }}</a>{% else %}an den Betreiber{% endif %}.</p>
+  <p>Du kannst dich außerdem bei einer Datenschutz-Aufsichtsbehörde beschweren, zum Beispiel bei der
+  Behörde deines Bundeslands.</p>
+
+  <h2>7. Sicherheit</h2>
+  <p>Die Verbindung ist per HTTPS verschlüsselt. Zugangs-Tokens sind verschlüsselt gespeichert,
+  Passwörter nur als Hash. Die Website lädt keine Skripte, Schriften oder Bilder von fremden Servern.
+  Der Quellcode ist <a href="{{ source_url }}" rel="noopener">öffentlich</a>.</p>
+</section>
+{% endblock %}
