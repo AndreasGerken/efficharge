@@ -97,7 +97,7 @@ with the demo battery: `uv run efficharge make-example 2026-04-17 --plugged 08:0
 Python 3.12, FastAPI, SQLAlchemy + SQLite, server-rendered Jinja + HTMX, Chart.js, no JS
 build step. One process: the web app, one state machine per plug, the energy-data fetcher
 and a maintenance job. The planner and the state machine are pure functions (no I/O, no
-clock), so they are tested without a plug.
+clock), so they are tested without a plug. More in [`ARCHITECTURE.md`](ARCHITECTURE.md).
 
 ## Development
 

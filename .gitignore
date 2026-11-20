@@ -17,4 +17,4 @@ demo.db*
 # private: our own server, roadmap and design notes, never in the public repo
 /deploy/
 /TODO.md
-/ARCHITECTURE.md
+/ARCHITECTURE.full.md
