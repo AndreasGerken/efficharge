@@ -51,7 +51,7 @@ def test_admin_sees_the_counts_but_is_not_counted(beta):  # noqa: F811
         page = c.get("/admin", headers={"user-agent": FIREFOX}).text
     # three visitors (the test client, Firefox, phone); /login: twice the test client while
     # logged out, Firefox twice, the phone once
-    assert "Last 7 days: 3 visitors, 6 page views, 0 demos started." in page
+    assert "Last 7 days: visitors 3 · page views 6 · demos started 0" in page
     assert "<code>/login</code></td><td>5</td><td>3</td>" in page
     assert "<code>/register</code></td><td>1</td><td>1</td>" in page
     assert "<code>/admin</code>" not in page and "/nothing-here" not in page

@@ -47,7 +47,7 @@
   <h2>{{ _("Visitors") }}</h2>
   {% set people, views, demos_started = visit_week %}
   {% if visit_days %}
-  <p>{{ _("Last 7 days: %(people)s visitors, %(views)s page views, %(demos)s demos started.", people=people, views=views, demos=demos_started) }}</p>
+  <p>{{ _("Last 7 days: visitors %(people)s · page views %(views)s · demos started %(demos)s", people=people, views=views, demos=demos_started) }}</p>
   <div class="table-scroll">
   <table class="admin-visits">
     <thead><tr><th>{{ _("Day") }}</th><th>{{ _("Visitors") }}</th><th>{{ _("Page views") }}</th><th>{{ _("Demos") }}</th></tr></thead>

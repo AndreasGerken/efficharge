@@ -1368,8 +1368,8 @@ msgstr "Gerade registrieren sich zu viele. Bitte versuch es in einer Minute noch
 msgid "Visitors"
 msgstr "Besucher"
 
-msgid "Last 7 days: %(people)s visitors, %(views)s page views, %(demos)s demos started."
-msgstr "Letzte 7 Tage: %(people)s Besucher, %(views)s Seitenaufrufe, %(demos)s gestartete Demos."
+msgid "Last 7 days: visitors %(people)s · page views %(views)s · demos started %(demos)s"
+msgstr "Letzte 7 Tage: Besucher %(people)s · Seitenaufrufe %(views)s · gestartete Demos %(demos)s"
 
 msgid "Page views"
 msgstr "Seitenaufrufe"
