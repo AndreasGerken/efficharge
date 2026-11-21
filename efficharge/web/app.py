@@ -67,7 +67,7 @@ from efficharge.energy.client import ATTRIBUTION, EnergyChartsClient
 from efficharge.energy.fetcher import EnergyFetcher
 from efficharge.planner.duration import LAST_N
 from efficharge.planner.window import PRESETS, Priority
-from efficharge.web import auth, example, i18n
+from efficharge.web import auth, example, i18n, visits
 from efficharge.web.data import (
     chart_payload,
     cumulative,
@@ -103,6 +103,7 @@ class Runtime:
     sessions: async_sessionmaker
     vault: Vault
     clock: Clock
+    visits: visits.VisitCounter
     supervisor: Supervisor | None = None
     fetcher: EnergyFetcher | None = None
     demo: DemoManager | None = None
@@ -144,6 +145,7 @@ templates.env.globals.update(
 
 
 def render(request: Request, name: str, status_code: int = 200, **ctx) -> HTMLResponse:
+    _count_visit(request, status_code)
     return templates.TemplateResponse(
         request,
         name,
@@ -162,6 +164,18 @@ def render(request: Request, name: str, status_code: int = 200, **ctx) -> HTMLRe
         },
         status_code=status_code,
     )
+
+
+def _count_visit(request: Request, status_code: int) -> None:
+    """A full page someone opened (not an htmx update, an error or a redirect)."""
+    route = request.scope.get("route")
+    if status_code != 200 or request.method != "GET" or route is None or _is_htmx(request):
+        return
+    runtime = rt(request)
+    if runtime.config.is_admin(getattr(request.state, "user", None)):
+        return
+    ua = request.headers.get("user-agent", "")
+    runtime.visits.page_view(runtime.clock(), route.path, _client_ip(request), ua)
 
 
 # ── dependencies ──
@@ -412,7 +426,8 @@ def create_app(
     if sessions is None:
         engine = make_engine(config.database_url)
         sessions = make_sessionmaker(engine)
-    runtime = Runtime(config, sessions, vault, clock, supervisor=supervisor)
+    counter = visits.VisitCounter(config.default_timezone)
+    runtime = Runtime(config, sessions, vault, clock, counter, supervisor=supervisor)
 
     @contextlib.asynccontextmanager
     async def lifespan(app: FastAPI):
@@ -450,6 +465,7 @@ def create_app(
             await runtime.demo.delete_leftovers()  # public demos of a previous run
             tasks.append(asyncio.create_task(runtime.demo.run(), name="demo"))
             await runtime.supervisor.start()
+            tasks.append(asyncio.create_task(runtime.visits.run(sessions), name="visits"))
         try:
             yield
         finally:
@@ -631,6 +647,7 @@ def _routes(app: FastAPI) -> None:
                 demo = await manager.create(request.session.get("locale") or i18n.get_locale())
             except DemoFull:
                 return render(request, "demo_full.html", 503)
+            rt(request).visits.event(rt(request).clock(), visits.DEMO_STARTS)
             locale = request.session.get("locale") or i18n.get_locale()
             async with rt(request).readers() as s:
                 auth.login_session(request, await s.get(User, demo.user_id), locale)

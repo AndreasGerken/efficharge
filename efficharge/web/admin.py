@@ -7,17 +7,17 @@ doesn't exist for them). The same actions work over SSH (``efficharge approve``)
 from __future__ import annotations
 
 import logging
-from datetime import datetime
+from datetime import date, datetime, timedelta
 from zoneinfo import ZoneInfo
 
-from babel.dates import format_datetime
+from babel.dates import format_date, format_datetime
 from fastapi import Depends, FastAPI, HTTPException, Request
 from fastapi.responses import HTMLResponse, RedirectResponse, Response
 from sqlalchemy import func, select
 
-from efficharge.db.models import Cycle, Device, DeviceAccount, User
+from efficharge.db.models import Cycle, Device, DeviceAccount, User, VisitCount
 from efficharge.db.repo import WAITING_REGISTRATIONS, accept_registration
-from efficharge.web import i18n
+from efficharge.web import i18n, visits
 
 # app.py imports this module at the end of create_app, when it is fully loaded. The names
 # must be module globals: FastAPI resolves the (string) annotations of the routes here.
@@ -39,6 +39,56 @@ def _when(dt: datetime | None, tz: ZoneInfo) -> str:
     if dt is None:
         return "–"
     return format_datetime(dt, "d MMM yyyy, HH:mm", tzinfo=tz, locale=i18n.get_locale())
+
+
+VISIT_DAYS = 14  # the table: one row per day
+TOP_PAGES_DAYS = 7
+
+
+async def visit_numbers(request: Request) -> dict:
+    """Visitors and page views of the last days, and the most viewed pages."""
+    runtime = rt(request)
+    await runtime.visits.flush(runtime.sessions)  # include the last minute
+    today = runtime.clock().astimezone(runtime.visits.tz).date()
+    days = [today - timedelta(days=n) for n in range(VISIT_DAYS)]
+    async with runtime.readers() as db:  # a new read: it sees what the flush just wrote
+        rows = (
+            await db.execute(
+                select(
+                    VisitCount.day, VisitCount.page, VisitCount.views, VisitCount.visitors
+                ).where(VisitCount.day >= days[-1].isoformat())
+            )
+        ).all()
+        first = await db.scalar(select(func.min(VisitCount.day)))  # counting began that day
+    by_day = {(r.day, r.page): r for r in rows}
+    days = [d for d in days if first is not None and d.isoformat() >= first]
+
+    def day_row(d: date) -> tuple[str, int, int, int]:
+        total = by_day.get((d.isoformat(), visits.TOTAL))
+        demos = by_day.get((d.isoformat(), visits.DEMO_STARTS))
+        label = format_date(d, "EEE d MMM", locale=i18n.get_locale())
+        return (
+            label,
+            total.visitors if total else 0,
+            total.views if total else 0,
+            demos.views if demos else 0,
+        )
+
+    since = (today - timedelta(days=TOP_PAGES_DAYS - 1)).isoformat()
+    pages: dict[str, list[int]] = {}
+    for r in rows:
+        if r.day >= since and r.page not in (visits.TOTAL, visits.DEMO_STARTS):
+            seen = pages.setdefault(r.page, [0, 0])
+            seen[0] += r.views
+            seen[1] += r.visitors
+    top = sorted(pages.items(), key=lambda kv: -kv[1][0])[:10]
+    week = [day_row(d) for d in days[:TOP_PAGES_DAYS]]
+    return {
+        "visit_days": [day_row(d) for d in days],
+        "visit_week": (sum(r[1] for r in week), sum(r[2] for r in week), sum(r[3] for r in week)),
+        "top_pages": [(page, views, people) for page, (views, people) in top],
+        "top_pages_days": TOP_PAGES_DAYS,
+    }
 
 
 async def waiting_count(db) -> int:
@@ -89,6 +139,7 @@ def register_admin_routes(app: FastAPI) -> None:
                 for u in users
             ],
             demos=len(demo.demos) if demo is not None and rt(request).config.demo else None,
+            **await visit_numbers(request),
         )
 
     async def waiting_user(db, user_id: int) -> User:

@@ -63,7 +63,8 @@ and the virtual plugs run the same logic with a simulated plug and their own clo
 
 The main tables: `users`, `device_accounts` (encrypted vendor token), `devices`,
 `device_settings`, `deadline_rules`, `device_state`, `cycles` (one charge with its plan,
-overrides and savings), `power_samples` and `energy_data`.
+overrides and savings), `power_samples`, `energy_data` and `visit_counts` (anonymous page
+views and visitors per day, for the admin page).
 
 ## 4. The state machine
 

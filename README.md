@@ -56,7 +56,7 @@ Press the plug's button if you need it charged right now.
 
 ## Privacy
 
-No ads, no tracking, no third-party scripts or fonts, one session cookie, no access log. Users delete their account and all its data themselves.
+No ads, no tracking, no third-party scripts or fonts, one session cookie, no access log; visits are only counted anonymously (numbers per day, nothing about the visitor). Users delete their account and all its data themselves.
 Meross tokens are stored encrypted (AES-GCM), passwords only as argon2id hashes. The full
 notice, including what the Meross cloud sees, is served at `/privacy`
 ([German](efficharge/web/templates/privacy_de.html),

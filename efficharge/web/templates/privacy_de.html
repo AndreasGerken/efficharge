@@ -10,7 +10,7 @@
 
   <p>Kurz gesagt: Efficharge speichert nur, was es zum Steuern deiner Steckdose braucht. Keine
   Werbung, kein Tracking, keine Analyse-Dienste, keine eingebundenen Inhalte von anderen
-  Servern. Dein Meross-Passwort wird nie gespeichert.</p>
+  Servern; Besuche werden nur anonym gezählt. Dein Meross-Passwort wird nie gespeichert.</p>
 
   <h2>1. Verantwortlich</h2>
   {% if imprint.has_imprint %}
@@ -27,6 +27,16 @@
   speichern IP-Adressen. Nur zum Schutz vor dem Erraten von Passwörtern merkt sich die Anwendung
   fehlgeschlagene Anmeldungen je IP-Adresse für 15 Minuten im Arbeitsspeicher (nicht auf der
   Festplatte). Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (Sicherheit des Dienstes).</p>
+
+  <h3>Besuchszahlen</h3>
+  <p>Um zu wissen, wie viele Menschen Efficharge nutzen, zählt die Anwendung Seitenaufrufe und
+  Besucher je Tag und Seite. Gespeichert werden nur diese Zahlen, ohne Bezug zu dir. Damit ein
+  Besucher nur einmal am Tag gezählt wird, bildet sie aus IP-Adresse und Browserkennung mit einem
+  zufälligen Schlüssel ein Pseudonym, nur im Arbeitsspeicher. Der Schlüssel wechselt jeden Tag,
+  die Pseudonyme werden dann verworfen; sie werden nie auf die Festplatte geschrieben. Dafür wird
+  kein Cookie verwendet, nichts in deinem Browser gespeichert und nichts weitergegeben.
+  Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (unser Interesse zu wissen, wie der Dienst genutzt
+  wird).</p>
 
   <h3>Cookie</h3>
   <p>Wir setzen genau ein Cookie (<code>ec_session</code>), schon beim ersten Besuch und auch ohne

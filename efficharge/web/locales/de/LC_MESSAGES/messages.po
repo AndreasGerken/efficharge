@@ -1364,3 +1364,27 @@ msgstr "Das Passwort darf höchstens %(n)d Zeichen haben."
 
 msgid "Too many registrations right now. Please try again in a minute."
 msgstr "Gerade registrieren sich zu viele. Bitte versuch es in einer Minute noch einmal."
+
+msgid "Visitors"
+msgstr "Besucher"
+
+msgid "Last 7 days: %(people)s visitors, %(views)s page views, %(demos)s demos started."
+msgstr "Letzte 7 Tage: %(people)s Besucher, %(views)s Seitenaufrufe, %(demos)s gestartete Demos."
+
+msgid "Page views"
+msgstr "Seitenaufrufe"
+
+msgid "Demos"
+msgstr "Demos"
+
+msgid "Pages, last %(num)d days"
+msgstr "Seiten, letzte %(num)d Tage"
+
+msgid "Page"
+msgstr "Seite"
+
+msgid "No visits yet."
+msgstr "Noch keine Besuche."
+
+msgid "Anonymous counts without cookies or stored IP addresses. A visitor is counted once a day; after a server restart, someone may be counted twice. Bots and your own visits are not counted."
+msgstr "Anonyme Zählung ohne Cookies und ohne gespeicherte IP-Adressen. Ein Besucher wird einmal am Tag gezählt; nach einem Neustart des Servers kann jemand doppelt gezählt werden. Bots und deine eigenen Besuche werden nicht gezählt."

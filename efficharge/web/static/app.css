@@ -342,6 +342,9 @@ footer p { margin: 0.35rem 0; }
 .admin-users { list-style: none; padding: 0; margin: 0; }
 .admin-users li { padding: 0.45rem 0; border-bottom: 1px solid var(--gridline); overflow-wrap: anywhere; }
 .admin-users li span { display: block; }
+.table-scroll { overflow-x: auto; }
+.admin-visits td + td, .admin-visits th + th { text-align: right; }
+.admin-visits code { overflow-wrap: anywhere; }
 
 /* settings: where you stand (the welcome for a new account) */
 .plug-state { border-left: 4px solid var(--accent); }

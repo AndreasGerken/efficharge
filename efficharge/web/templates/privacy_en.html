@@ -10,8 +10,8 @@
   <p class="muted">As of November 2026. A translation: the <a href="/privacy?lang=de">German version</a> is binding.</p>
 
   <p>In short: Efficharge stores only what it needs to control your smart plug. No ads, no
-  tracking, no analytics, no content loaded from other servers. Your Meross password is never
-  stored.</p>
+  tracking, no analytics services, no content loaded from other servers; visits are only counted
+  anonymously. Your Meross password is never stored.</p>
 
   <h2>1. Controller</h2>
   {% if imprint.has_imprint %}
@@ -27,6 +27,15 @@
   <strong>no access log</strong>: neither the web server nor the application stores IP addresses.
   Only to stop password guessing, the application remembers failed logins per IP address for
   15 minutes in memory (never on disk). Legal basis: Art. 6(1)(f) GDPR (security of the service).</p>
+
+  <h3>Visit counts</h3>
+  <p>To know how many people use Efficharge, the application counts page views and visitors per
+  day and page. Only these numbers are stored, with no reference to you. To count a visitor only
+  once a day, it forms a pseudonym from the IP address and the browser identification with a
+  random key, in memory only. The key changes every day, and the pseudonyms are then discarded;
+  they are never written to disk. No cookie is used for this, nothing is stored in your browser
+  and nothing is passed on. Legal basis: Art. 6(1)(f) GDPR (our interest in knowing how the
+  service is used).</p>
 
   <h3>Cookie</h3>
   <p>We set exactly one cookie (<code>ec_session</code>), from your first visit on and also without

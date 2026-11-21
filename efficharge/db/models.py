@@ -245,3 +245,14 @@ class ApiToken(Base):
     last_used: Mapped[datetime | None] = mapped_column(UTCDateTime)
 
     __table_args__ = (UniqueConstraint("token_hash"),)
+
+
+class VisitCount(Base):
+    """Anonymous page views and visitors per day and page (see web/visits.py)."""
+
+    __tablename__ = "visit_counts"
+
+    day: Mapped[str] = mapped_column(String(10), primary_key=True)  # YYYY-MM-DD, local
+    page: Mapped[str] = mapped_column(String(64), primary_key=True)  # a route, "*" = all
+    views: Mapped[int] = mapped_column(Integer, default=0)
+    visitors: Mapped[int] = mapped_column(Integer, default=0)
