@@ -108,6 +108,19 @@ def _serve(host: str, port: int, dev: bool, speed: float) -> None:
     )
 
 
+def _test_mail() -> None:
+    from efficharge.config import Config
+    from efficharge.mail import Mailer
+
+    config = Config.from_env()
+    mailer = Mailer.from_config(config)
+    if mailer is None or not config.signup_mail_to:
+        raise SystemExit("no mail: set EFFICHARGE_SMTP_HOST (and the admins or NOTIFY_EMAIL)")
+    body = "Mail from efficharge works: sign-ups will be announced like this.\n"
+    asyncio.run(mailer.send(config.signup_mail_to, "efficharge: test mail", body))
+    print(f"sent from {mailer.sender} to {', '.join(config.signup_mail_to)}")
+
+
 USER_COMMANDS = ("add-user", "set-password", "pending", "approve", "reject", "add-virtual-plug")
 
 
@@ -135,6 +148,7 @@ def main(argv: list[str] | None = None) -> None:
         user_cmd.add_argument("email")
         user_cmd.add_argument("--locale", default="de", choices=["de", "en"])
     sub.add_parser("pending", help="registrations waiting for approval")
+    sub.add_parser("test-mail", help="send a test mail to the sign-up mail's recipients")
     example = sub.add_parser("make-example", help="rebuild the start page's example charge")
     example.add_argument("day", help="a past day, e.g. 2026-04-17")
     example.add_argument("--plugged", default="09:00", help="plug-in time (Europe/Berlin)")
@@ -166,6 +180,8 @@ def main(argv: list[str] | None = None) -> None:
 
         logging.basicConfig(level=logging.WARNING)
         asyncio.run(make_example(args.day, args.plugged, args.ready))
+    elif args.command == "test-mail":
+        _test_mail()
     elif args.command == "serve":
         _serve(args.host, args.port, args.dev, args.speed)
     elif args.command == "meross-check":

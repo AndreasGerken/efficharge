@@ -143,6 +143,9 @@ its energy data can no longer change. Overrides count honestly, usually as about
 - **Translations:** German and English through gettext. The core returns codes, never
   text; only the web layer translates. Numbers, money and dates are formatted with Babel.
   `tests/test_i18n.py` fails if a German translation is missing.
+- **Mail:** optional, over the SMTP server of a mailbox (`mail.py`, TLS only). For now
+  one use: a mail to the admins when someone signs up, at most hourly and without personal
+  data (`web/signups.py`).
 - **Fail-safe:** errors and lost connections leave the plug on (section 4).
 - **Data:** Energy-Charts, prices from Bundesnetzagentur | SMARD.de, CC BY 4.0, credited
   in the footer.

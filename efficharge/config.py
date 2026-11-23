@@ -7,7 +7,7 @@ systemd's ``EnvironmentFile=``. Locally, export them or use a ``.env`` with your
 from __future__ import annotations
 
 import os
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import timedelta
 
 
@@ -59,6 +59,21 @@ class Config:
     hosting_provider: str = ""
     #: privacy notice: the oldest database backup, in days (all copies, wherever they are)
     backup_days: int = 30
+    #: the site's address for links in mails, e.g. https://efficharge.de
+    public_url: str = ""
+    #: sending mail (a mail to the admins when someone signs up); empty host: no mail
+    smtp_host: str = ""
+    smtp_port: int = 587  # 465: TLS from the start; any other port must offer STARTTLS
+    smtp_user: str = ""
+    smtp_password: str = field(default="", repr=False)
+    #: the sender (empty: the SMTP user)
+    mail_from: str = ""
+    #: who gets the sign-up mails, comma-separated (empty: the admins)
+    notify_emails: frozenset[str] = frozenset()
+
+    @property
+    def signup_mail_to(self) -> list[str]:
+        return sorted(self.notify_emails or self.admins)
 
     def is_admin(self, user) -> bool:
         return user is not None and not user.is_demo and user.email in self.admins
@@ -97,4 +112,13 @@ class Config:
             allow_indexing=_flag("ALLOW_INDEXING", False),
             hosting_provider=_env("HOSTING_PROVIDER", ""),
             backup_days=int(_env("BACKUP_DAYS", "30")),
+            public_url=_env("PUBLIC_URL", ""),
+            smtp_host=_env("SMTP_HOST", ""),
+            smtp_port=int(_env("SMTP_PORT", "587")),
+            smtp_user=_env("SMTP_USER", ""),
+            smtp_password=_env("SMTP_PASSWORD", ""),
+            mail_from=_env("MAIL_FROM", ""),
+            notify_emails=frozenset(
+                e.strip().lower() for e in _env("NOTIFY_EMAIL", "").split(",") if e.strip()
+            ),
         )

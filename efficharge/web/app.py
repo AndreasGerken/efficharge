@@ -65,9 +65,10 @@ from efficharge.db.session import make_engine, make_sessionmaker, readers_for
 from efficharge.demo_setup import FAST, DemoFull, DemoInstance, DemoManager
 from efficharge.energy.client import ATTRIBUTION, EnergyChartsClient
 from efficharge.energy.fetcher import EnergyFetcher
+from efficharge.mail import Mailer
 from efficharge.planner.duration import LAST_N
 from efficharge.planner.window import PRESETS, Priority
-from efficharge.web import auth, example, i18n, visits
+from efficharge.web import auth, example, i18n, signups, visits
 from efficharge.web.data import (
     chart_payload,
     cumulative,
@@ -107,6 +108,8 @@ class Runtime:
     supervisor: Supervisor | None = None
     fetcher: EnergyFetcher | None = None
     demo: DemoManager | None = None
+    #: the mail to the admins about new sign-ups (None: no mail configured)
+    signups: signups.SignupNotifier | None = None
 
     @property
     def readers(self) -> async_sessionmaker:
@@ -428,11 +431,19 @@ def create_app(
         sessions = make_sessionmaker(engine)
     counter = visits.VisitCounter(config.default_timezone)
     runtime = Runtime(config, sessions, vault, clock, counter, supervisor=supervisor)
+    mailer = Mailer.from_config(config)
+    if mailer and config.signup_mail_to:
+        admin_url = f"{config.public_url.rstrip('/')}/admin" if config.public_url else "/admin"
+        runtime.signups = signups.SignupNotifier(
+            mailer, config.signup_mail_to, sessions, clock, admin_url
+        )
 
     @contextlib.asynccontextmanager
     async def lifespan(app: FastAPI):
         i18n.load_catalogs()
         tasks: list[asyncio.Task] = []
+        if runtime.signups is not None:
+            tasks.append(asyncio.create_task(runtime.signups.run(), name="signup mail"))
         if start_workers:
             runtime.supervisor = Supervisor(
                 sessions,
@@ -802,6 +813,8 @@ def _routes(app: FastAPI) -> None:
         )
         await db.commit()
         logger.info("new registration %d waits for approval", user.id)
+        if rt(request).signups is not None:
+            rt(request).signups.new_signup()
         return render(request, "register.html", done=True)
 
     @app.post("/logout", dependencies=[Csrf])
